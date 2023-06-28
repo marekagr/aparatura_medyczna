@@ -52,7 +52,7 @@ const app = express();
   // console.log('stan połaczenia (2-connecting, 1-connected) teraz:',connection.readyState)
   mongoose
   .connect(
-    "mongodb://localhost:27017/aparatura",
+    "mongodb://127.0.0.1:27017/aparatura",
     {
       useUnifiedTopology: true,
       useNewUrlParser: true,
@@ -63,8 +63,8 @@ const app = express();
     console.log("Connected to database!");
 
   })
-  .catch(() => {
-    console.log("Connection failed!");
+  .catch((error) => {
+    console.log("Connection failed!",error);
   });
 
 
