@@ -1,0 +1,17 @@
+:host{
+    display: flex;
+    flex-direction: column;;
+    height: 100%;
+  }
+  button, a {
+    margin:0 1em;
+  }
+  button div,a div{
+    display: inline-block;
+    line-height: 1em;
+    font-size: 1.5em;
+    margin: 2em 0.5em;
+    height: 3em;
+  }
+  
+  

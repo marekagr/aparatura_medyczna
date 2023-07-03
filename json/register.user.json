@@ -1,0 +1,447 @@
+[{
+  "_id": {
+    "$oid": "5fb00fed3529ae417cfe5091"
+  },
+  "user": "admin",
+  "password": "$2b$04$AQl.UBdCeWpMDSpARgW2e.o9JJrUMnIr6krFdGt7WwyKGMIgqPB.6",
+  "__v": 0,
+  "grantDirectory": [
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85ceb6d63982200171d01"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915f6"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d436d63982200171d04"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915f7"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d1f6d63982200171d03"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915f8"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d7a6d63982200171d07"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915f9"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fde75bf5f8bbe32d8f0b38f"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915fa"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d686d63982200171d06"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915fb"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d576d63982200171d05"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915fc"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85cc66d63982200171d00"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915fd"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85cab6d63982200171cff"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915fe"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d906d63982200171d08"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915ff"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d096d63982200171d02"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d891600"
+      }
+    }
+  ],
+  "grantMenu": [
+    {
+      "grantMenuId": {
+        "$oid": "60284b74e906df2754b4731a"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915ea"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "5fba44db7368684a50bebf6a"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915eb"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "5fcc07cac7bca957602c4f9e"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915ec"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "60284b54e906df2754b47319"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915ed"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "5fde77bf5f8bbe32d8f0b390"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915ee"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "5fba45437368684a50bebf6e"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915ef"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "5fcbff02c7bca957602c4f9d"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915f0"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "5fba45307368684a50bebf6d"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915f1"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "5fba44fb7368684a50bebf6b"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915f2"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "5fd0b1c5ac26ae2c8c0a025c"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915f3"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "5fba45247368684a50bebf6c"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915f4"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "5fba44aa4b5d65d061eddb25"
+      },
+      "_id": {
+        "$oid": "6215fed88fe1bc713d8915f5"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "5fb0121e3529ae417cfe5093"
+  },
+  "user": "organizacyjny",
+  "password": "$2b$10$5JjRekhM9TJpNk9ozXorV.UfJ2/RMfwnoRZNRUuTmYndRgJI9ASM.",
+  "__v": 0,
+  "grantMenu": [
+    {
+      "grantMenuId": {
+        "$oid": "5fba44aa4b5d65d061eddb25"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d891619"
+      }
+    }
+  ],
+  "grantDirectory": [
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85ceb6d63982200171d01"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d89161a"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d436d63982200171d04"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d89161b"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d1f6d63982200171d03"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d89161c"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d7a6d63982200171d07"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d89161d"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fde75bf5f8bbe32d8f0b38f"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d89161e"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d686d63982200171d06"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d89161f"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d576d63982200171d05"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d891620"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85cc66d63982200171d00"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d891621"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85cab6d63982200171cff"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d891622"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d906d63982200171d08"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d891623"
+      }
+    },
+    {
+      "grantDirectoryId": {
+        "$oid": "5fd85d096d63982200171d02"
+      },
+      "_id": {
+        "$oid": "6215fefb8fe1bc713d891624"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "60284aa9e906df2754b47318"
+  },
+  "user": "zamówienia",
+  "password": "$2b$10$849EB3gZlOSg6ZEUNPQ9tOK8jGWKRPbUwdglOSRTjBkDir4QU44y2",
+  "__v": 0,
+  "grantDirectory": [],
+  "grantMenu": [
+    {
+      "grantMenuId": {
+        "$oid": "60284b74e906df2754b4731a"
+      },
+      "_id": {
+        "$oid": "621ccee01cf0b80d3321b3f2"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "60284b54e906df2754b47319"
+      },
+      "_id": {
+        "$oid": "621ccee01cf0b80d3321b3f3"
+      }
+    },
+    {
+      "grantMenuId": {
+        "$oid": "5fba44aa4b5d65d061eddb25"
+      },
+      "_id": {
+        "$oid": "621ccee01cf0b80d3321b3f4"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "60a228007e9cd84584a15960"
+  },
+  "user": "asia",
+  "password": "$2b$10$849EB3gZlOSg6ZEUNPQ9tOK8jGWKRPbUwdglOSRTjBkDir4QU44y2",
+  "__v": 0,
+  "grantDirectory": [
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580cb"
+      },
+      "grantDirectoryId": {
+        "$oid": "5fd85ceb6d63982200171d01"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580cc"
+      },
+      "grantDirectoryId": {
+        "$oid": "5fd85d436d63982200171d04"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580cd"
+      },
+      "grantDirectoryId": {
+        "$oid": "5fd85d1f6d63982200171d03"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580ce"
+      },
+      "grantDirectoryId": {
+        "$oid": "5fd85d7a6d63982200171d07"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580cf"
+      },
+      "grantDirectoryId": {
+        "$oid": "5fde75bf5f8bbe32d8f0b38f"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580d0"
+      },
+      "grantDirectoryId": {
+        "$oid": "5fd85d686d63982200171d06"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580d1"
+      },
+      "grantDirectoryId": {
+        "$oid": "5fd85d576d63982200171d05"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580d2"
+      },
+      "grantDirectoryId": {
+        "$oid": "5fd85cc66d63982200171d00"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580d3"
+      },
+      "grantDirectoryId": {
+        "$oid": "5fd85cab6d63982200171cff"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580d4"
+      },
+      "grantDirectoryId": {
+        "$oid": "5fd85d906d63982200171d08"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580d5"
+      },
+      "grantDirectoryId": {
+        "$oid": "5fd85d096d63982200171d02"
+      }
+    }
+  ],
+  "grantMenu": [
+    {
+      "_id": {
+        "$oid": "60a22835dd4d9c3b3cc580ca"
+      },
+      "grantMenuId": {
+        "$oid": "5fba45307368684a50bebf6d"
+      }
+    }
+  ]
+}]

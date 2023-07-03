@@ -1,0 +1,266 @@
+<div class="container">
+    <div class="example-loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  
+  </div>
+  
+  
+    <mat-toolbar id="topBar">
+    <mat-toolbar-row>
+      <!-- <button   mat-stroked-button matTooltip="dodaj"  (click)="addLogBook()"  class="edit"><mat-icon>exposure_plus_1</mat-icon>&nbsp;dodaj kartę</button> -->
+      <!-- <button   mat-stroked-button  (click)="findErrors()"  class="edit"><mat-icon>error_outline</mat-icon>&nbsp;dodaj kartę</button> -->
+      <!-- <span class="fill-remaining-space"></span> -->
+        <form novalidate  [formGroup]="filterDateForm">
+  
+  
+          <mat-form-field appearance="fill" class="example-form-field">
+            <mat-label>Data obow. od-do</mat-label>
+            <mat-date-range-input [rangePicker]="date_of_issue_start_stop">
+              <input matStartDate placeholder="Data od" formControlName="date_of_deal_start" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+              <input matEndDate placeholder="Data do" formControlName="date_of_deal_stop" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="date_of_issue_start_stop"></mat-datepicker-toggle>
+            <mat-date-range-picker #date_of_issue_start_stop>
+              <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel>Anuluj</button>
+                <button mat-raised-button color="primary" matDateRangePickerApply (click)="chooseDateRange()" #chooseDateButton>Wbierz</button>
+                <!-- <button mat-raised-button color="primary" matDateRangePickerApply #chooseDateButton>Wbierz</button> -->
+              </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="szukaj nr umowy" [matAutocomplete]="auto" formControlName='number_of_deal'>
+          </mat-form-field>
+          <!-- <span>Twój wybór: {{filterDateForm.get('deal_name')?.value | json}}</span> -->
+  
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
+            <ng-container *ngIf="isLoading">
+              <mat-option *ngFor="let deal of registerItems" [value]="deal.number_of_deal">
+                <span>{{ deal.number_of_deal }}</span>
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </form>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <table mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows mat-elevation-z8 matSortActive="own_number_of_deal" matSortDirection="asc" matSortDisableClear>
+  
+  
+    <!-- ['date_of_sign','do']; -->
+  
+    <ng-container matColumnDef="own_number_of_deal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nr wew.</th>
+      <td mat-cell *matCellDef="let element"> {{element.own_number_of_deal}} <td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="number_of_deal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nr umowy</th>
+      <td mat-cell *matCellDef="let element"> {{element.number_of_deal}} <td>
+      <!-- <td mat-cell *matCellDef="let element"> {{element.date|date:'y.MM.dd':'+0000':'pl'}} <td> -->
+    </ng-container>
+  
+    <ng-container matColumnDef="part2_of_deal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Strona umowy</th>
+      <td mat-cell *matCellDef="let element"> {{element.part2_of_deal}} <td>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="type_of_deal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Typ umowy</th>
+      <td mat-cell *matCellDef="let element"> {{element.type_of_deal}} <td>
+    </ng-container>
+  
+    <ng-container matColumnDef="issue_of_deal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Przedmiot umowy</th>
+      <td mat-cell *matCellDef="let element"> {{element.issue_of_deal}} <td>
+    </ng-container>
+  
+    <ng-container matColumnDef="value_of_deal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header align="center" class="header-align-right">Wartość</th>
+      <td mat-cell *matCellDef="let element" align="right"> {{element.value_of_deal|currency:'zł':'symbol':'1.2-2':'pl'}} <td>
+    </ng-container>
+  
+    <ng-container matColumnDef="date_of_sign">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Data podp.</th>
+      <td mat-cell *matCellDef="let element" align="center">{{element.date_of_sign|date:'dd.MM.y':'+0000':'pl'}} <td>
+    </ng-container>
+  
+    <ng-container matColumnDef="date_of_deal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data obow.</th>
+      <td mat-cell *matCellDef="let element"> {{element.date_of_deal_start|date:'dd.MM.y':'+0000':'pl'}} - {{element.date_of_deal_stop|date:'dd.MM.y':'+0000':'pl'}}<td>
+    </ng-container>
+  
+  
+  <!--
+  
+    <ng-container matColumnDef="description_car">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Opis</th>
+      <td mat-cell *matCellDef="let element"> {{element.description_car?.substring(0,10)}} <td>
+    </ng-container>
+  
+  
+  
+  
+    <ng-container matColumnDef="description_service">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Uwagi serwisu</th>
+      <td mat-cell *matCellDef="let element"> {{element.description_service?.substring(0,10)}} <td>
+    </ng-container> -->
+  
+  
+  
+    <ng-container matColumnDef="do" >
+      <th mat-header-cell *matHeaderCellDef>Wykonaj</th>
+      <td mat-cell *matCellDef="let element;let ind = dataIndex;">
+        <!-- <button  (click)="editTownDialog(element)" mat-raised-button color="basic"><mat-icon style="font-size:1.2em">mode_edit</mat-icon>edycja</button>
+        &nbsp;
+        <button  (click)="deleteTown(element,ind)" mat-raised-button color="basic"><mat-icon style="font-size:1.2em">delete_forever</mat-icon>usuń</button>   -->
+        <!-- <span  class="icon-narrow" matTooltip="edytuj"  mat-raised-button color="basic"><mat-icon style="font-size:1.2em">mode_edit</mat-icon></span> -->
+        <button *ngIf="currentUser"  mat-button matTooltip="edytuj"  (click)="edit(element,ind);$event.stopPropagation()"><mat-icon>mode_edit</mat-icon></button>
+        &nbsp;
+          <button *ngIf="currentUser"  mat-button matTooltip="usuń"  (click)="delete(element,ind);$event.stopPropagation()"><mat-icon>delete_forever</mat-icon></button>
+        &nbsp;
+          <button   mat-button matTooltip="szczegóły"  (click)="element.isExpanded = !element.isExpanded"><mat-icon *ngIf="element !== expandedElement">open_in_full</mat-icon><mat-icon *ngIf="element == expandedElement">close_fullscreen</mat-icon></button>
+      <!-- <span  class="icon-narrow" matTooltip="usuń"  (click)="delete(element,ind)" mat-raised-button color="basic"><mat-icon style="font-size:1.2em">delete_forever</mat-icon></span> -->
+      &nbsp;
+  
+      <td>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail"
+             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="example-element-diagram">
+  
+            <div style="display: flex;flex-flow: row wrap;">
+              <div [ngClass]="'expandBox'">
+                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Pozostałe dane </h3>
+                <div style="flex:1 1 48%;border-right: thin dashed rgba(112,112,112,0.5);margin-right: 5px;">
+                  <div>status: <span [ngClass]="'expandInfo'">{{element.status}}</span></div>
+                  <div>wartość: <span [ngClass]="'expandInfo'"> {{element.value_of_deal|currency:'zł':'symbol':'1.2-2':'pl'}}</span></div>
+                  <div>data zgłoszenia: <span [ngClass]="'expandInfo'">{{element.date_of_registration|date:'dd.MM.y':'+0000':'pl'}}</span></div>
+                  <div>jednostka zgłaszająca: <span [ngClass]="'expandInfo'"> {{element.registration_business_unit}}</span></div>
+                  <div>osoba zgłaszająca: <span [ngClass]="'expandInfo'"> {{element.registration_person}}</span></div>
+                </div>
+                <div style="flex:1 1 48%">
+                  <span [ngClass]="'expandInfo'">{{element.issue_of_deal}}</span>
+                </div>
+              </div>
+              <div [ngClass]="'expandBox'">
+                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Strony umowy</h3>
+                <div style="flex:1 1 48%;border-right: thin dashed rgba(112,112,112,0.5);margin-right: 5px;">
+                  <mat-icon style="color:red">looks_one</mat-icon><span [ngClass]="'expandInfo'">{{element.part1_of_deal}}</span>
+                  <ul>
+                    <li *ngFor="let representative of element.representative1_of_deal"><span [ngClass]="'expandInfo'">{{representative.name}}</span>,&nbsp;<span [ngClass]="'expandInfo'">{{representative.surname}}</span></li>
+                  </ul>
+                </div>
+  
+                <div style="flex:1 1 48%">
+                  <mat-icon style="color:red">looks_two</mat-icon><span [ngClass]="'expandInfo'">{{element.part2_of_deal}}</span>
+                  <ul>
+                    <li *ngFor="let representative of element.representative2_of_deal"><span [ngClass]="'expandInfo'">{{representative.name}}</span>,&nbsp;<span [ngClass]="'expandInfo'">{{representative.surname}}</span></li>
+                  </ul>
+                </div>
+              </div>
+              <!-- <div style="display: flex;flex-flow: row wrap;flex:1 1 100%">
+                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Zgłoszenie</h3>
+                <div style="flex:1 1 100%">
+                  <div><span style="color:red">data zgłoszenia: </span>{{element.date_of_registration|date:'dd.MM.y':'+0000':'pl'}}</div>
+                  <div><span style="color:red">jednostka zgłaszająca: </span> {{element.registration_business_unit}}</div>
+                  <div><span style="color:red">osoba zgłaszająca: </span> {{element.registration_person}}</div>
+                </div>
+  
+              </div> -->
+            </div>
+          </div>
+          <div class="example-element-diagram">
+            <div style="display: flex;flex-flow: row wrap;">
+              <div [ngClass]="'expandBox'">
+                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Źródła współfinansowania </h3>
+                <div style="flex:1 1 100%">
+                  <table>
+                    <tr *ngFor="let source of element.cofinancing">
+                        <td><span [ngClass]="'expandInfo'">{{source.source}}</span></td><td><span [ngClass]="'expandInfo'">{{source.value|currency:'zł':'symbol':'1.2-2':'pl'}}</span></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div [ngClass]="'expandBox'">
+                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Uzupełnienia i zmiany </h3>
+                <div style="flex:1 1 100%">
+                  <table>
+                    <tr *ngFor="let change of element.changeDeal">
+                        <td><span [ngClass]="'expandInfo'">{{change.info}}</span></td><td><span [ngClass]="'expandInfo'">{{change.date|date:'dd.MM.y':'+0000':'pl'}}</span></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div [ngClass]="'expandBox'">
+                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Informacje o rozwiązaniu umowy za zgodą stron </h3>
+                <div style="flex:1 1 100%">
+                  <table>
+                    <tr *ngFor="let change of element.terminationWithDeal">
+                        <td><span [ngClass]="'expandInfo'">{{change.info}}</span></td><td><span [ngClass]="'expandInfo'">{{change.date|date:'dd.MM.y':'+0000':'pl'}}</span></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div [ngClass]="'expandBox'">
+                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Odstąpienie, wypowiedzenie, wygaśnięcie </h3>
+                <div style="flex:1 1 100%">
+                  <table>
+                    <tr *ngFor="let change of element.terminationRest">
+                        <td><span [ngClass]="'expandInfo'">{{change.info}}</span></td><td><span [ngClass]="'expandInfo'">{{change.date|date:'dd.MM.y':'+0000':'pl'}}</span></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="example-element-diagram">
+            <div style="display: flex;flex-flow: row wrap;">
+              <div style="display: flex;flex-flow: row wrap;flex:1 1 100%">
+                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Załączniki </h3>
+                <div style="flex:1 1 100%">
+                  <ul>
+                    <!-- <li *ngFor="let file of element.files"><a href="/rejestr/download/{{element._id}}/{{file.filename}}" download>{{file.filename}}</a></li> -->
+                    <li *ngFor="let file of element.files"><a href=""  download=""  (click)="download(file.filename,element._id)">{{file.filename}}</a></li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+  
+  
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+    class="example-element-row"
+      [class.student-expanded-row]="expandedElement === row"
+    (click)="expandedElement = expandedElement === row ? null : row"
+      >
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30]"
+                   showFirstLastButtons itemsPerPageLabel="item per pagelabel"
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  
+  
+  
+  </div>
+  
+  
+  
+  
+  
+  

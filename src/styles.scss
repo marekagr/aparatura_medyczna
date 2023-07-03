@@ -1,4 +1,80 @@
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body, html {
+    height: 100%;
+  }
+  body{margin: 0;}
+  /* You can add global styles to this file, and also import other style files */
+  .mat-greenish {
+    // background-color: #378673;
+    color: #378673;
+    // min-width: 40px;
+    border-color: #378673;
+  
+  }
+  .mat-stroked-button.mat-greenish:not([disabled]){
+    border-color: #378673;
+  }
+  
+  .fill-remaining-space {
+    /* This fills the remaining space, by using flexbox.
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+  
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: rgba(255,255,255,1);
+    padding: 0px;
+  }
+  
+  mat-form-field.mat-form-field-appearance-fill div.mat-form-field-wrapper .mat-form-field-flex {
+    border-radius: 4px 4px 0 0;
+    padding: 0em;
+  }
+  
+  
+  
+  mat-form-field.mat-form-field-appearance-fill .mat-form-field-wrapper{
+      padding-bottom: 1.20em;
+    }
+  .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label:not(.mat-empty):not(.mat-form-field-empty)
+  ,.mat-form-field-label-wrapper .mat-form-field-label {
+    color:#a62d25;
+   font-size:1em;
+  }
+  .mat-form-field-label {
+    font-size: 0.9em!important;
+  }
+  
+  .mat-card h4{
+    color: #602230;
+    font-size: 1.4em;
+  }
+  
+  mat-toolbar {
+    border-bottom: thin dashed rgba(220, 220, 220, 0.6);
+    background-color: transparent;
+  }
+  
+  form{
+    // font-size: 2em;
+  
+    mat-form-field.mat-form-field-appearance-fill div.mat-form-field-wrapper .mat-form-field-flex {
+      border-radius: 4px 4px 0 0;
+      padding: 0em;
+    }
+    .mat-form-field-wrapper{
+      padding-bottom: 1.25em;
+    }
+  
+    .width80px div div div {
+      width: 80px;
+      flex: 1 0;
+    }
+  
+    div.mat__tab__content.ng-star-inserted{
+      background-color:#d5c7c71f ;
+    }
+  
+  }
+  
+  
+  
