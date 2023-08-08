@@ -1,5 +1,9 @@
 export interface Deal {
   _id:string,
+  name:string,
+  type:string,
+  sn:string,
+
 
   own_number_of_deal?:number,
   number_of_deal:string,

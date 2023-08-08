@@ -24,6 +24,7 @@ import { RegisterListComponent } from './components/register/components/register
 import { RegisterFormComponent } from './components/register/components/register-form/register-form.component';
 import { AttachmentListComponent } from './components/register/components/attachment-list/attachment-list.component';
 import { LoginComponent } from './components/auth/components/login/login.component';
+import { ProducerComponent } from './components/directory/producer/components/producer/producer.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LoginComponent } from './components/auth/components/login/login.compone
     RegisterListComponent,
     RegisterFormComponent,
     AttachmentListComponent,
-    LoginComponent
+    LoginComponent,
+    ProducerComponent
   ],
   imports: [
     BrowserModule,
