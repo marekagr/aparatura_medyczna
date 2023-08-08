@@ -322,7 +322,7 @@ export class UtilityService extends AppDictionaryService{
       data=new Date(data);
     if(data instanceof moment)
       data=(<Moment>data).toDate()
-    let dataH=new Date(data.getFullYear(),data.getMonth(),data.getDate(),1,5);
+    let dataH=new Date(data.getFullYear(),data.getMonth(),data.getDate(),6,5);
     // console.log(data,data.toUTCString(),dataH.toUTCString())
     return Date.parse(dataH.toUTCString());
   }

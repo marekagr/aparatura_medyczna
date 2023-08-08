@@ -4,11 +4,14 @@
       <!-- <a routerLink="/"><span style="font-size: 1.5em;"><mat-icon>house</mat-icon></span></a> -->
       <a routerLink="/" routerLinkActive="focus__item" >Aparatura medyczna</a>
       <!-- <a routerLink="/nowa" routerLinkActive="focus__item" >Nowa umowa</a> -->
-      <a *ngIf="currentUser" (click)="newDeal()" routerLinkActive="focus__item"  style="color:red">Nowa umowa<span><mat-icon>plus_one</mat-icon></span></a>
+      
+      <!-- 08.08.2023 <a *ngIf="currentUser" (click)="newDeal()" routerLinkActive="focus__item"  style="color:red">Nowa umowa<span><mat-icon>plus_one</mat-icon></span></a> -->
+      <a  (click)="newDeal()" routerLinkActive="focus__item"  style="color:red">Nowa umowa<span><mat-icon>plus_one</mat-icon></span></a>
 
 
       <span class="example-spacer"></span>
-      <button mat-button [matMenuTriggerFor]="settingsMenu" *ngIf="checkGrant('Ustawienia')">
+      <!-- 08.08.2023 <button mat-button [matMenuTriggerFor]="settingsMenu" *ngIf="checkGrant('Ustawienia')"> -->
+      <button mat-button [matMenuTriggerFor]="settingsMenu" >
         <mat-icon>settings</mat-icon>
       </button>
       <mat-menu #settingsMenu="matMenu">
@@ -16,11 +19,21 @@
         <!-- <button mat-menu-item (click)="showSnackbar()"> <mat-icon> manage_accounts </mat-icon>snackbar</button> -->
 
         <!-- <button *ngIf="!currentUser" mat-stroked-button  class="menu__button" (click)="goto('login')">Zaloguj się</button> -->
+
+
+<!--    08.08.2023    
         <button *ngIf="checkGrant('Administracja')" mat-menu-item (click)="goto('Administracja')"><mat-icon>admin_panel_settings</mat-icon>Panel admin.</button>
         <input  #csvInput hidden="true" type="file" onclick="this.value=null" (change)="onFileSelect($event)" accept=".csv"/>
         <button *ngIf="checkGrant('Administracja')"   mat-menu-item (click)="csvInput.click();setCvsSourceFun('Organizacyjny')"><mat-icon>import_export</mat-icon>Import-organizacyjny</button>
         <button *ngIf="checkGrant('Administracja')"   mat-menu-item (click)="csvInput.click();setCvsSourceFun('Zamowienia')"><mat-icon>import_export</mat-icon>Import-zamówienia <mat-checkbox [labelPosition]="labelPosition" style="color:red" [(ngModel)]="checked" (click)="checkClick($event)" >spr.nr</mat-checkbox></button>
-        <button *ngIf="checkGrant('Administracja')"   mat-menu-item (click)="csvInput.click();setCvsSourceFun('Znajdź brakujace')"><mat-icon>import_export</mat-icon>Znajdź brakujace <mat-checkbox [labelPosition]="labelPosition" style="color:red" [(ngModel)]="checked" (click)="checkClick($event)" >spr.nr</mat-checkbox></button>
+        <button *ngIf="checkGrant('Administracja')"   mat-menu-item (click)="csvInput.click();setCvsSourceFun('Znajdź brakujace')"><mat-icon>import_export</mat-icon>Znajdź brakujace <mat-checkbox [labelPosition]="labelPosition" style="color:red" [(ngModel)]="checked" (click)="checkClick($event)" >spr.nr</mat-checkbox></button> -->
+
+        <button  mat-menu-item (click)="goto('Administracja')"><mat-icon>admin_panel_settings</mat-icon>Panel admin.</button>
+        <input  #csvInput hidden="true" type="file" onclick="this.value=null" (change)="onFileSelect($event)" accept=".csv"/>
+        <button mat-menu-item (click)="csvInput.click();setCvsSourceFun('Organizacyjny')"><mat-icon>import_export</mat-icon>Import-organizacyjny</button>
+        <button mat-menu-item (click)="csvInput.click();setCvsSourceFun('Zamowienia')"><mat-icon>import_export</mat-icon>Import-zamówienia <mat-checkbox [labelPosition]="labelPosition" style="color:red" [(ngModel)]="checked" (click)="checkClick($event)" >spr.nr</mat-checkbox></button>
+        <button mat-menu-item (click)="csvInput.click();setCvsSourceFun('Znajdź brakujace')"><mat-icon>import_export</mat-icon>Znajdź brakujace <mat-checkbox [labelPosition]="labelPosition" style="color:red" [(ngModel)]="checked" (click)="checkClick($event)" >spr.nr</mat-checkbox></button>
+
         <button *ngIf="currentUser" mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>Wyloguj</button>
       </mat-menu>
 

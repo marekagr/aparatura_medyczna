@@ -6,6 +6,7 @@ $color-h:#a62d25;
 .mat-toolbar{
   border-bottom: thin dashed rgba(220,220,220,0.6);
   margin-bottom: 0.5em;
+  .mat-mdc-form-field{margin-right: 15px;display: inline-block ;}
 }
 .mat-button{
   padding:0px;

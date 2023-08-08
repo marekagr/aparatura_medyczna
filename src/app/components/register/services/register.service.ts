@@ -166,17 +166,23 @@ export class RegisterService {
        const dealArray:any[]=[]
        if(typeof x[0]!=undefined && x[0]!='' && x[0]!=null){
         const deal={
-          _id:null as null,__v:null as null, own_number_of_deal:x[0], number_of_deal:x[2],type_of_deal:'',deal_name: 'umowa',
-          date_of_sign:this.utilityService.getDateFromString(x[3],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"),place_of_sign: 'Tarnobrzeg', date_of_deal_start:this.utilityService.getDateFromString(x[3],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"), date_of_deal_stop:null as null,
-          issue_of_deal:x[4], status:'obowiązująca',value_of_deal:0,date_of_registration:this.utilityService.getDateFromString(x[5],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"), registration_business_unit: x[6],registration_person: x[7].match(/([A-Za-ząśżźćńłóęĄŻŚŹĆŃŁÓĘ]|\s){1,}/gu)[0],
-          part1_of_deal: 'Wojewódzki Szpital im. Zofii z Zamoyskich Tarnowskiej w Tarnobrzegu',
-          part2_of_deal: x[1], representative1_of_deal:[] as any[],representative2_of_deal:[] as any[],cofinancing:[] as any[],changeDeal:[] as any[],terminationWithDeal:[] as any[],terminationRest:[] as any[]}
+          // _id:null as null,__v:null as null, own_number_of_deal:x[0], number_of_deal:x[2],type_of_deal:'',deal_name: 'umowa',
+          // date_of_sign:this.utilityService.getDateFromString(x[3],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"),place_of_sign: 'Tarnobrzeg', date_of_deal_start:this.utilityService.getDateFromString(x[3],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"), date_of_deal_stop:null as null,
+          // issue_of_deal:x[4], status:'obowiązująca',value_of_deal:0,date_of_registration:this.utilityService.getDateFromString(x[5],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"), registration_business_unit: x[6],registration_person: x[7].match(/([A-Za-ząśżźćńłóęĄŻŚŹĆŃŁÓĘ]|\s){1,}/gu)[0],
+          // part1_of_deal: 'Wojewódzki Szpital im. Zofii z Zamoyskich Tarnowskiej w Tarnobrzegu',
+          // part2_of_deal: x[1], representative1_of_deal:[] as any[],representative2_of_deal:[] as any[],cofinancing:[] as any[],changeDeal:[] as any[],terminationWithDeal:[] as any[],terminationRest:[] as any[]}
+          _id:null as null,__v:null as null, name:x[0], type:x[1],sn:x[2],vendor: x[3],year_prduction:x[4],deal_service:x[5],opk:x[6],number_of_deal:x[7],deal_old_service:x[8],
+          date_of_last_inspection:this.utilityService.getDateFromString(x[9],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"),
+          inventory_number:x[10],comments:[] as any[],end_of_quarantee:null,inspection_period:null}
+          for(let i=11;i<=12;i++)
+            if(typeof x[i]!=undefined && x[i]!='' && x[i]!=null)deal.comments.push({comment:x[i]})          
+          
           console.log('deal',deal)
           dealArray.push(deal)
         }
         this.addDealFromCVS(dealArray).subscribe(items=>
-          {console.log('from csv',items)}
-          )
+           {console.log('from csv',items)}
+           )
     })
   }
 

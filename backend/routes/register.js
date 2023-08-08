@@ -155,37 +155,43 @@ router.post("", (req, res) => {
   delete body['_id'];
 
   const item = new Register(body);
-
-  Register.findOne({ number_of_deal:body['number_of_deal']}).then(document => {
-    console.log('document find:',document)
-    if(document!=null){
-      const err = new Error('something went wrong');
-        res.status(500).json({
-        blad:'error find',
-      });
-    }
-    else{
-       item.save().then(data => {
-        res.status(201).json(data);
-      })
-      .catch(err => {
-        res.status(500).json({
-          blad:'error',
-          error: err
-        });
-      });
-    }
-  // If you call `next()` with an argument, that argument is assumed to be
-  // an error.
-    // next(err);
-    // res.status(200).json(document);
+  item.save().then(data => {
+    res.status(201).json(data);
   })
   .catch(err => {
+    console.log('error post',err)
     res.status(500).json({
-      blad:'error find 2',
+      blad:'error',
+      error: err
+    });
+  });
 
-  });
-  });
+  // Register.findOne({ number_of_deal:body['number_of_deal']}).then(document => {
+  //   console.log('document find:',document)
+  //   if(document!=null){
+  //     const err = new Error('something went wrong');
+  //       res.status(500).json({
+  //       blad:'error find',
+  //     });
+  //   }
+  //   else{
+  //      item.save().then(data => {
+  //       res.status(201).json(data);
+  //     })
+  //     .catch(err => {
+  //       res.status(500).json({
+  //         blad:'error',
+  //         error: err
+  //       });
+  //     });
+  //   }
+  // })
+  // .catch(err => {
+  //   res.status(500).json({
+  //     blad:'error find 2',
+
+  // });
+  // });
 
 
   // item.save().then(data => {

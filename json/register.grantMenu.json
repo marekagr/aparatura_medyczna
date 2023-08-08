@@ -1,0 +1,84 @@
+[{
+  "_id": {
+    "$oid": "5fba44aa4b5d65d061eddb25"
+  },
+  "name": "Ustawienia",
+  "desc": "Ustawienia"
+},
+{
+  "_id": {
+    "$oid": "5fba44db7368684a50bebf6a"
+  },
+  "name": "Karta pojazdu",
+  "desc": "Karta pojazdu"
+},
+{
+  "_id": {
+    "$oid": "5fba44fb7368684a50bebf6b"
+  },
+  "name": "Serwis",
+  "desc": "Serwis kartoteka"
+},
+{
+  "_id": {
+    "$oid": "5fba45247368684a50bebf6c"
+  },
+  "name": "Slowniki",
+  "desc": "Słowniki kartoteka"
+},
+{
+  "_id": {
+    "$oid": "5fba45307368684a50bebf6d"
+  },
+  "name": "Raporty",
+  "desc": "Raporty"
+},
+{
+  "_id": {
+    "$oid": "5fba45437368684a50bebf6e"
+  },
+  "name": "Pilne",
+  "desc": "Pilne"
+},
+{
+  "_id": {
+    "$oid": "5fcbff02c7bca957602c4f9d"
+  },
+  "name": "Pojazdy/:id",
+  "desc": "Pojazd edycja,przegląd"
+},
+{
+  "_id": {
+    "$oid": "5fcc07cac7bca957602c4f9e"
+  },
+  "name": "Karta pojazdu/:id",
+  "desc": "Karta pojazdu - edycja, przegląd"
+},
+{
+  "_id": {
+    "$oid": "5fd0b1c5ac26ae2c8c0a025c"
+  },
+  "name": "Serwis/:id",
+  "desc": "Serwis pojazdu - edycja,przegląd"
+},
+{
+  "_id": {
+    "$oid": "5fde77bf5f8bbe32d8f0b390"
+  },
+  "name": "Administracja",
+  "desc": "Panel administratora"
+},
+{
+  "_id": {
+    "$oid": "60284b54e906df2754b47319"
+  },
+  "name": "Pacjent",
+  "desc": "Pacjenci kartoteka"
+},
+{
+  "_id": {
+    "$oid": "60284b74e906df2754b4731a"
+  },
+  "name": "Grafik",
+  "desc": "Grafik"
+}]

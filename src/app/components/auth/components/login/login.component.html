@@ -1,6 +1,10 @@
-<div style="height: 100%;display: flex;flex-flow: column wrap;align-items: center;justify-content: center;">
+<div style="height: 100%;display: flex;flex-flow: row wrap;align-items: center;justify-content: center;width: 80%;">
+    <div style="align-self: stretch;margin: 2em 3em 0 0;"><h2>Aparatura Medyczna</h2> 
+      <img src="/assets/logo.png">
+    </div>
     <mat-card>
-      <h3>Zaloguj się</h3>
+      <h3>Zaloguj się do systemu</h3>
+      <h4>wprowadź dane logowania</h4>
     <!-- <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
       <mat-form-field>
         <input matInput name="user" ngModel type="text" placeholder="Użytkownik" #userInput="ngModel" required >
@@ -17,12 +21,14 @@
       <!-- <h2>Zaloguj się </h2>
       -->
         <mat-form-field>
-          <input matInput placeholder="twój login" value=""   formControlName="userCtrl">
+          <mat-label>twój login</mat-label>
+          <input matInput type="text" value=""   formControlName="userCtrl">          
           <mat-error *ngIf="form.controls['userCtrl'].hasError('required')">
               Login jest<strong> wymagany</strong>
             </mat-error>
         </mat-form-field>&nbsp;
         <mat-form-field class="email">
+            <mat-label>hasło</mat-label>
             <input matInput type="password" placeholder="hasło" formControlName="passwordCtrl" >
             <mat-error *ngIf="form.controls['passwordCtrl'].hasError('required')">
               Hasło jest<strong> wymagane</strong>

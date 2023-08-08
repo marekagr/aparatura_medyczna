@@ -14,9 +14,8 @@ const cofinancing = mongoose.Schema({
   value:{type:Number,required:true},
 },{ timestamps: true });
 
-const information = mongoose.Schema({
-  info:{type:String,required:true},
-  date:Date
+const commentsSchema = mongoose.Schema({
+  comment:{type:String,required:true},
 },{ timestamps: true });
 
 const plik = mongoose.Schema({
@@ -25,33 +24,23 @@ const plik = mongoose.Schema({
 },{ timestamps: true });
 
 const registerSchema = mongoose.Schema({
-  own_number_of_deal:Number,
-  number_of_deal:{type:String,required:true,unique:true},
-  type_of_deal:String,
-  deal_name: String,
+  name: {type:String,required:true},
+  type: String,
+  sn: String,
+  vendor: String,
+  year_prduction:String,
+  deal_service:String,
+  opk:String,
+  number_of_deal:String,
+  deal_old_service:String,
+  date_of_last_inspection:Date,
+  inventory_number:String,
+  comments:[commentsSchema],
+  end_of_quarantee:Date,
+  inspection_period:String,
 
-  date_of_sign:{type:Date,required:true},
-  place_of_sign:{type:String,required:true},
-  date_of_deal_start:{type:Date,required:true},
-  date_of_deal_stop:{type:Date},
 
-  part1_of_deal:{type:String,required:true},
-  part2_of_deal:{type:String,required:true},
-  representative1_of_deal:[representativeSchema],
-  representative2_of_deal:[representativeSchema],
 
-  issue_of_deal:String,
-  value_of_deal:String,
-  status:String,
-
-  date_of_registration:{type:Date},
-  registration_business_unit:String,
-  registration_person:String,
-
-  cofinancing:[cofinancing],
-  changeDeal:[information],
-  terminationWithDeal:[information],
-  terminationRest:[information],
 
   files:[plik],
 
@@ -77,32 +66,32 @@ registerSchema.set('collection', 'register');
 //   }
 // });
 
-registerSchema.pre('save', function(next) {
-  var doc = this;
-  doc.validate(function (err) {
-    if (err) {console.log('validate error post');}
-    else {console.log('OK validate post')}
-  });
+// registerSchema.pre('save', function(next) {
+//   var doc = this;
+//   doc.validate(function (err) {
+//     if (err) {console.log('validate error post');}
+//     else {console.log('OK validate post')}
+//   });
  
 
 
-  if(doc.isNew){
-  Counter.findOneAndUpdate(
-      {_id: 'registerId'},
-      {$inc: { seq: 1} },
-      {new: true, upsert: true}).
-      then(function(count) {
-        console.log("...count: "+JSON.stringify(count));
-        doc.own_number_of_deal = count.seq;
-      next();
-    })
-    .catch(function(error) {
-      console.error("counter error-> : "+error);
-      throw error;
-    });
-  }
-  else next()
-});
+//   if(doc.isNew){
+//   Counter.findOneAndUpdate(
+//       {_id: 'registerId'},
+//       {$inc: { seq: 1} },
+//       {new: true, upsert: true}).
+//       then(function(count) {
+//         console.log("...count: "+JSON.stringify(count));
+//         doc.own_number_of_deal = count.seq;
+//       next();
+//     })
+//     .catch(function(error) {
+//       console.error("counter error-> : "+error);
+//       throw error;
+//     });
+//   }
+//   else next()
+// });
 
 
 // registerSchema.pre('validate', function(doc) {
