@@ -1,4 +1,6 @@
 import { Component, OnInit,ViewChild,ElementRef,ChangeDetectionStrategy } from '@angular/core';
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgFor} from '@angular/common';
 import { MatDialog, MatDialogRef,MatDialogConfig } from '@angular/material/dialog';
 import {ActivatedRoute,  Router} from "@angular/router";
 import { MatButton } from '@angular/material/button';
@@ -27,9 +29,20 @@ export class HeaderComponent {
   checked = true;
   labelPosition: 'before' | 'after' = 'before'
   dialogRegisterFormRef: MatDialogRef<RegisterFormComponent> | undefined
-
+  toppings = new FormControl('');
+  columnList: any[] = 
+    [{id:'name',viewValue:'Nazwa Urządzenia',activated:true}, {id:'type',viewValue:'Typ',activated:true},{id:'sn',viewValue:'Numer fabryczny',activated:true},{id:'producer',viewValue:'Producent',activated:true},
+    {id:'year_production',viewValue:'Rok',activated:true},{id:'deal_service',viewValue:'Serwis',activated:true},{id:'number_of_deal',viewValue:'Nr umowy',activated:true},
+    {id:'deal_old_service',viewValue:'Stary serwis',activated:false},{id:'opk',viewValue:'Oddział',activated:true},{id:'date_of_last_inspection',viewValue:'Data przeglądu',activated:true},
+    {id:'inventory_number',viewValue:'Numer inwentarzowy',activated:true},{id:'end_of_quarantee',viewValue:'Koniec gwarancji',activated:true},{id:'inspection_period',viewValue:'Przegląd okres',activated:true},
+    {id:'do',viewValue:'Wykonaj',activated:true}
+    ]
+  private selectedColums: any[] = [];
+  
   constructor(public utilityService:UtilityService,public authService:AuthService,public attachmentService: AttachmentService,public registerService: RegisterService,private activeRoute: ActivatedRoute,private router: Router,private dialog: MatDialog) {
     this.authService.currentUser$.subscribe(x => this.currentUser = x!);
+    this.registerService.setcolumnList$(this.columnList);
+    
    }
 
    newDeal(){
@@ -85,8 +98,8 @@ export class HeaderComponent {
               if(this.cvsSource=='Organizacyjny')
                 this.registerService.addDealsFromCSVOrganizacyjny(wynik)
               else
-              if(this.cvsSource=='Zamowienia')
-                this.registerService.addDealsFromCSVZamowienia(wynik)
+              if(this.cvsSource=='Producenci')
+                this.registerService.addProducerFromCSV(wynik)
               if(this.cvsSource=='Znajdź brakujace')
                 this.registerService.findMissingDealsFromCSV(wynik)
               console.log('wynik',wynik);
@@ -119,4 +132,42 @@ export class HeaderComponent {
     return this.cvsSource=name
   }
 
+
+  // public onMenuKeyDown(event: KeyboardEvent, index: number) {
+  //   switch (event.key) {
+  //     case 'ArrowUp':
+  //       if (index > 0) {
+  //         this.setCheckboxFocus(index - 1);
+  //       } else {
+  //         this.menuItemsRef.last.focus();
+  //       }
+  //       break;
+  //     case 'ArrowDown':
+  //       if (index !== this.menuItemsRef.length - 1) {
+  //         this.setCheckboxFocus(index + 1);
+  //       } else {
+  //         this.setFocusOnFirstItem();
+  //       }
+  //       break;
+  //      case 'Enter':
+  //       event.preventDefault();
+  //       this.premiumAutomobilesList[index].activated
+  //         = !this.premiumAutomobilesList[index].activated;
+  //       this.onVehicleSelect();
+  //       setTimeout(() => this.matMenuTriggerRef.closeMenu(), 200);
+  //       break; 
+  //   }
+  // }
+
+   onColumnSelect(ischecked:any,column:any){
+    const index=this.columnList.findIndex((col)=>{return col.id===column.id})
+    this.columnList[index]["activated"]=ischecked
+    this.selectedColums = this.columnList
+    .filter(menuitem => menuitem.activated)
+    //.map(menuitem => menuitem.id);
+    console.log('selected columns',this.selectedColums,ischecked,column)
+    this.registerService.setcolumnList$(this.selectedColums)
+  }
+
+  
 }

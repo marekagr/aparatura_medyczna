@@ -46,8 +46,10 @@ const dutchRangeLabel = (page: number, pageSize: number, length: number) => {
 export class RegisterListComponent implements OnInit,OnDestroy,AfterViewInit {
   public registerItems$: Subscription=new Subscription();
   public registerItems:any[]=[];
+  public columnList$: Subscription=new Subscription();
+  public columnList:any[]=[];
   public currentUser: CurrentUser|null=null;
-  displayedColumns = ['own_number_of_deal', 'number_of_deal','part2_of_deal','type_of_deal','issue_of_deal','value_of_deal','date_of_sign','date_of_deal','do'];
+  displayedColumns = ['name', 'type','sn','producer','year_production','deal_service','number_of_deal','deal_old_service','opk','date_of_last_inspection','inventory_number','end_of_quarantee','inspection_period','do'];
   dataSource = new MatTableDataSource();
   dialogRegisterFormRef: MatDialogRef<RegisterFormComponent> | undefined
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
@@ -75,6 +77,7 @@ export class RegisterListComponent implements OnInit,OnDestroy,AfterViewInit {
 
 
   ngOnInit(): void {
+    this.registerService.getregisterItems()
     this.registerItems$=this.registerService.getregisterItems$().subscribe(items=>{
       console.log('registerItems',this.registerItems);
       this.registerItems=this.registerService.getregisterItemsValue()
@@ -83,6 +86,18 @@ export class RegisterListComponent implements OnInit,OnDestroy,AfterViewInit {
       // this.chooseDateRange()
       this.ref.detectChanges();
     })
+
+    this.columnList$=this.registerService.getcolumnList$().subscribe(items=>{
+      this.displayedColumns = items
+    .filter(menuitem => menuitem.activated)
+    .map(menuitem => menuitem.id);
+      this.columnList=this.registerService.getcolumnListValue()
+      console.log('columnList',this.columnList);
+      // this.chooseDateRange()
+      this.ref.detectChanges();
+    })
+
+
     this.sort.sortChange.subscribe(()=>{console.log('sortchange',this.sort.active,this.sort.direction);this.sortState={active:this.sort.active,direction:this.sort.direction}})
 
     this.matPaginatorIntl.firstPageLabel="pierwsza strona"

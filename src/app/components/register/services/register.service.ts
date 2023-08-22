@@ -17,6 +17,7 @@ export class RegisterService {
   globalUrl=GlobalVariable.BASE_API_URL;
 
   private registerItems$ = new BehaviorSubject<any[]>([]);
+  private columnList$ = new BehaviorSubject<any[]>([]);
   private currentDeal$ = new BehaviorSubject<any>({});
 
   constructor(private utilityService: UtilityService,private http:HttpClient) {
@@ -141,12 +142,12 @@ export class RegisterService {
 
   }
 
-  addDealFromCVS(dealArray:any[]):Observable<any>{
+  addDealFromCVS(dealArray:any[],url:String='rejestr'):Observable<any>{
     let getUrls:any[]=[];
-    const url = `${this.globalUrl}/rejestr`;
+    const urlHelp = `${this.globalUrl}/${url}`;
    // getUrls.push(this.http.post<any>(url,{pairs:element.pairs,description:'',categoryid:`${element.category._id['$oid']}`,bracketsid:null},httpOptionsText));
    dealArray.forEach(item=>{
-      getUrls.push(this.http.post<{any:any}>( url,item,httpOptionsText))
+      getUrls.push(this.http.post<{any:any}>( urlHelp,item,httpOptionsText))
     })
     let data:any=new Observable(observer=>{
       forkJoin(getUrls).subscribe({
@@ -171,7 +172,7 @@ export class RegisterService {
           // issue_of_deal:x[4], status:'obowiązująca',value_of_deal:0,date_of_registration:this.utilityService.getDateFromString(x[5],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"), registration_business_unit: x[6],registration_person: x[7].match(/([A-Za-ząśżźćńłóęĄŻŚŹĆŃŁÓĘ]|\s){1,}/gu)[0],
           // part1_of_deal: 'Wojewódzki Szpital im. Zofii z Zamoyskich Tarnowskiej w Tarnobrzegu',
           // part2_of_deal: x[1], representative1_of_deal:[] as any[],representative2_of_deal:[] as any[],cofinancing:[] as any[],changeDeal:[] as any[],terminationWithDeal:[] as any[],terminationRest:[] as any[]}
-          _id:null as null,__v:null as null, name:x[0], type:x[1],sn:x[2],vendor: x[3],year_prduction:x[4],deal_service:x[5],opk:x[6],number_of_deal:x[7],deal_old_service:x[8],
+          _id:null as null,__v:null as null, name:x[0], type:x[1],sn:x[2],producer: x[3],year_production:x[4],deal_service:x[5],opk:x[6],number_of_deal:x[7],deal_old_service:x[8],
           date_of_last_inspection:this.utilityService.getDateFromString(x[9],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"),
           inventory_number:x[10],comments:[] as any[],end_of_quarantee:null,inspection_period:null}
           for(let i=11;i<=12;i++)
@@ -186,21 +187,18 @@ export class RegisterService {
     })
   }
 
-  addDealsFromCSVZamowienia(result:any[]){
+  addProducerFromCSV(result:any[]){
     let dealArray:any[]=[];
      result.forEach(x=>{
        const dealArray:any[]=[]
        if(typeof x[0]!=undefined && x[0]!='' && x[0]!=null){
-        const deal={
-          _id:null as null,__v:null as null, own_number_of_deal:null as null, number_of_deal:x[0],type_of_deal:'',deal_name: x[8],
-          date_of_sign:this.utilityService.getDateFromString(x[2],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"),place_of_sign: 'Tarnobrzeg', date_of_deal_start:this.utilityService.getDateFromString(x[3],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"), date_of_deal_stop:this.utilityService.getDateFromString(x[4],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"),
-          issue_of_deal:x[7], status:'obowiązująca',value_of_deal:(x[6].replace(/\s/g,"")).replace(",","."),date_of_registration:this.utilityService.getDateFromString(x[5],/(\d+)\.(\d+).(\d+)/,"$2/$1/$3"), registration_business_unit: 'Sekcja Zamówień Publicznych',registration_person: 'Sylwia Sapielak-Majchrowska',
-          part1_of_deal: 'Wojewódzki Szpital im. Zofii z Zamoyskich Tarnowskiej w Tarnobrzegu',
-          part2_of_deal: x[1], representative1_of_deal:[] as any[],representative2_of_deal:[] as any[],cofinancing:[] as any[],changeDeal:[] as any[],terminationWithDeal:[] as any[],terminationRest:[] as any[]}
-          console.log('deal',deal)
-          dealArray.push(deal)
+        const producer={
+          _id:null as null,__v:null as null, name:x[0]
+          }
+          console.log('deproduceral',producer)
+          dealArray.push(producer)
         }
-        this.addDealFromCVS(dealArray).subscribe(items=>
+        this.addDealFromCVS(dealArray,'producent').subscribe(items=>
           {console.log('from csv',items)}
           )
     })
@@ -229,5 +227,20 @@ export class RegisterService {
     })
     console.log('missing nr umowy',dealArray)
   }
+
+ 
+  
+    setcolumnList$(data:any[]){
+      this.columnList$.next([...data]);
+    }
+  
+    getcolumnList$() {
+      return this.columnList$.asObservable();
+    }
+  
+    getcolumnListValue() {
+      return this.columnList$.getValue()
+    }
+
 }
 

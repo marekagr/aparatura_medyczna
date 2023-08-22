@@ -6,7 +6,7 @@
       <!-- <a routerLink="/nowa" routerLinkActive="focus__item" >Nowa umowa</a> -->
       
       <!-- 08.08.2023 <a *ngIf="currentUser" (click)="newDeal()" routerLinkActive="focus__item"  style="color:red">Nowa umowa<span><mat-icon>plus_one</mat-icon></span></a> -->
-      <a  (click)="newDeal()" routerLinkActive="focus__item"  style="color:red">Nowa umowa<span><mat-icon>plus_one</mat-icon></span></a>
+      <a  (click)="newDeal()" routerLinkActive="focus__item"  style="color:red">Nowe urządzenie<span><mat-icon>plus_one</mat-icon></span></a>
 
 
       <span class="example-spacer"></span>
@@ -31,13 +31,22 @@
         <button  mat-menu-item (click)="goto('Administracja')"><mat-icon>admin_panel_settings</mat-icon>Panel admin.</button>
         <input  #csvInput hidden="true" type="file" onclick="this.value=null" (change)="onFileSelect($event)" accept=".csv"/>
         <button mat-menu-item (click)="csvInput.click();setCvsSourceFun('Organizacyjny')"><mat-icon>import_export</mat-icon>Import-organizacyjny</button>
-        <button mat-menu-item (click)="csvInput.click();setCvsSourceFun('Zamowienia')"><mat-icon>import_export</mat-icon>Import-zamówienia <mat-checkbox [labelPosition]="labelPosition" style="color:red" [(ngModel)]="checked" (click)="checkClick($event)" >spr.nr</mat-checkbox></button>
+        <button mat-menu-item (click)="csvInput.click();setCvsSourceFun('Producenci')"><mat-icon>import_export</mat-icon>Import-producenci <mat-checkbox [labelPosition]="labelPosition" style="color:red" [(ngModel)]="checked" (click)="checkClick($event)" >spr.nr</mat-checkbox></button>
         <button mat-menu-item (click)="csvInput.click();setCvsSourceFun('Znajdź brakujace')"><mat-icon>import_export</mat-icon>Znajdź brakujace <mat-checkbox [labelPosition]="labelPosition" style="color:red" [(ngModel)]="checked" (click)="checkClick($event)" >spr.nr</mat-checkbox></button>
 
         <button *ngIf="currentUser" mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>Wyloguj</button>
       </mat-menu>
 
 
+ 
+
+      <button mat-button [matMenuTriggerFor]="menu">Kolumny</button>
+<mat-menu #menu="matMenu">
+  <div>
+    <mat-checkbox #menuItems *ngFor="let item of columnList; let i = index;" (click)="$event.stopPropagation()"  [checked]="item.activated" (change)="onColumnSelect($event.checked,item)">{{item.viewValue}}</mat-checkbox>
+  </div>
+</mat-menu>
+      
       <!-- <a *ngIf="checkGrant('Administracja')" routerLink="/Administracja" mat-stroked-button routerLinkActive="focus__item"><span style="font-size: 1.5em;"><mat-icon>admin_panel_settings</mat-icon></span>Panel admin.</a>
       <button *ngIf="currentUser" mat-stroked-button  class="menu__button" (click)="logout()">Wyloguj</button> -->
       <a *ngIf="!currentUser" routerLink="/login"><button mat-stroked-button>Zaloguj się</button></a>

@@ -24,7 +24,12 @@ body, html {
     background-color: rgba(255,255,255,1);
   }
 
-  
+  .mat-mdc-menu-content{
+    padding: 0px 5px;
+    display: flex;
+    flex-direction: column;
+    .mat-mdc-checkbox{display: block;margin-right:1em;}
+  }
 
   .mat-form-field-appearance-fill .mat-form-field-flex {
     background-color: rgba(255,255,255,1);

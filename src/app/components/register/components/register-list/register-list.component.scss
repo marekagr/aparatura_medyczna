@@ -140,19 +140,24 @@ fieldset
 table {
   width: 100%;
   
-  th:nth-of-type(1){
-    width:50px
-  }
-  th:nth-of-type(2){
-    width:5%
-  }
-  th:nth-of-type(3){
-    width:15%
-  }
-  th:nth-of-type(5){
-    width:20%
-  }
+  // th:nth-of-type(1){
+  //   width:15%
+  // }
+  // th:nth-of-type(2){
+  //   width:10%
+  // }
+  // th:nth-of-type(3){
+  //   width:10%
+  // }
+  // th:nth-of-type(5){
+  //   width:5%
+  // }
 
+}
+td .mdc-button{min-width: 36px;padding: 0px 4px;}
+
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0 10px 0 10px;
 }
 
 tr.example-detail-row {

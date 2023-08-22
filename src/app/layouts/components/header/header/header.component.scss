@@ -51,5 +51,14 @@ mat-toolbar{
     .example-spacer {
       flex: 1 1 auto;
     }
+    .mat-menu-content {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem 1rem;
+    }
+    .mat-mdc-menu-content{
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

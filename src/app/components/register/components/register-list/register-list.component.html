@@ -30,7 +30,7 @@
           </mat-form-field>
   
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="szukaj nr umowy" [matAutocomplete]="auto" formControlName='number_of_deal'>
+            <input matInput placeholder="szukaj" [matAutocomplete]="auto" formControlName='number_of_deal'>
           </mat-form-field>
           <!-- <span>Twój wybór: {{filterDateForm.get('deal_name')?.value | json}}</span> -->
   
@@ -51,50 +51,74 @@
   
     <!-- ['date_of_sign','do']; -->
   
-    <ng-container matColumnDef="own_number_of_deal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nr wew.</th>
-      <td mat-cell *matCellDef="let element"> {{element.own_number_of_deal}} <td>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa Urządzenia</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} <td>
     </ng-container>
   
     <!-- Name Column -->
-    <ng-container matColumnDef="number_of_deal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nr umowy</th>
-      <td mat-cell *matCellDef="let element"> {{element.number_of_deal}} <td>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Typ</th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} <td>
       <!-- <td mat-cell *matCellDef="let element"> {{element.date|date:'y.MM.dd':'+0000':'pl'}} <td> -->
     </ng-container>
   
-    <ng-container matColumnDef="part2_of_deal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Strona umowy</th>
-      <td mat-cell *matCellDef="let element"> {{element.part2_of_deal}} <td>
+    <ng-container matColumnDef="sn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Numer fabryczny</th>
+      <td mat-cell *matCellDef="let element"> {{element.sn}} <td>
     </ng-container>
   
   
-    <ng-container matColumnDef="type_of_deal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Typ umowy</th>
-      <td mat-cell *matCellDef="let element"> {{element.type_of_deal}} <td>
+    <ng-container matColumnDef="producer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Producent</th>
+      <td mat-cell *matCellDef="let element"> {{element.producer}} <td>
     </ng-container>
   
-    <ng-container matColumnDef="issue_of_deal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Przedmiot umowy</th>
-      <td mat-cell *matCellDef="let element"> {{element.issue_of_deal}} <td>
+    <ng-container matColumnDef="year_production">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rok</th>
+      <td mat-cell *matCellDef="let element"> {{element.year_production}} <td>
     </ng-container>
   
-    <ng-container matColumnDef="value_of_deal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header align="center" class="header-align-right">Wartość</th>
-      <td mat-cell *matCellDef="let element" align="right"> {{element.value_of_deal|currency:'zł':'symbol':'1.2-2':'pl'}} <td>
+    <ng-container matColumnDef="deal_service">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header align="center" class="header-align-right">Serwis</th>
+      <td mat-cell *matCellDef="let element" align="right"> {{element.deal_service}} <td>
+    </ng-container>
+
+    <ng-container matColumnDef="number_of_deal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header align="center" class="header-align-right">Nr umowy</th>
+      <td mat-cell *matCellDef="let element" align="right"> {{element.number_of_deal}} <td>
+    </ng-container>
+
+    <ng-container matColumnDef="deal_old_service">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header align="center" class="header-align-right">Stary serwis</th>
+      <td mat-cell *matCellDef="let element" align="right"> {{element.deal_old_service}} <td>
     </ng-container>
   
-    <ng-container matColumnDef="date_of_sign">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header >Data podp.</th>
-      <td mat-cell *matCellDef="let element" align="center">{{element.date_of_sign|date:'dd.MM.y':'+0000':'pl'}} <td>
+    <ng-container matColumnDef="opk">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header align="center" class="header-align-right">Oddział</th>
+      <td mat-cell *matCellDef="let element" align="right"> {{element.opk}} <td>
+    </ng-container>
+
+    <ng-container matColumnDef="date_of_last_inspection">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Data przeglądu</th>
+      <td mat-cell *matCellDef="let element" align="center">{{element.date_of_last_inspection|date:'dd.MM.y':'+0000':'pl'}} <td>
     </ng-container>
   
-    <ng-container matColumnDef="date_of_deal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data obow.</th>
-      <td mat-cell *matCellDef="let element"> {{element.date_of_deal_start|date:'dd.MM.y':'+0000':'pl'}} - {{element.date_of_deal_stop|date:'dd.MM.y':'+0000':'pl'}}<td>
+    <ng-container matColumnDef="inventory_number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Numer inwentarzowy</th>
+      <td mat-cell *matCellDef="let element"> {{element.inventory_number}}<td>
     </ng-container>
-  
-  
+   
+    <ng-container matColumnDef="end_of_quarantee">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Koniec gwarancji</th>
+      <td mat-cell *matCellDef="let element"> {{element.end_of_quarantee}}<td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="inspection_period">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Przegląd okres</th>
+      <td mat-cell *matCellDef="let element"> {{element.inspection_period}}<td>
+    </ng-container>
   <!--
   
     <ng-container matColumnDef="description_car">
@@ -119,9 +143,14 @@
         &nbsp;
         <button  (click)="deleteTown(element,ind)" mat-raised-button color="basic"><mat-icon style="font-size:1.2em">delete_forever</mat-icon>usuń</button>   -->
         <!-- <span  class="icon-narrow" matTooltip="edytuj"  mat-raised-button color="basic"><mat-icon style="font-size:1.2em">mode_edit</mat-icon></span> -->
-        <button *ngIf="currentUser"  mat-button matTooltip="edytuj"  (click)="edit(element,ind);$event.stopPropagation()"><mat-icon>mode_edit</mat-icon></button>
+       
+        <!-- <button *ngIf="currentUser"  mat-button matTooltip="edytuj"  (click)="edit(element,ind);$event.stopPropagation()"><mat-icon>mode_edit</mat-icon></button>
         &nbsp;
           <button *ngIf="currentUser"  mat-button matTooltip="usuń"  (click)="delete(element,ind);$event.stopPropagation()"><mat-icon>delete_forever</mat-icon></button>
+        &nbsp; -->
+        <button  mat-button matTooltip="edytuj"  (click)="edit(element,ind);$event.stopPropagation()"><mat-icon>mode_edit</mat-icon></button>
+        &nbsp;
+          <button  mat-button matTooltip="usuń"  (click)="delete(element,ind);$event.stopPropagation()"><mat-icon>delete_forever</mat-icon></button>
         &nbsp;
           <button   mat-button matTooltip="szczegóły"  (click)="element.isExpanded = !element.isExpanded"><mat-icon *ngIf="element !== expandedElement">open_in_full</mat-icon><mat-icon *ngIf="element == expandedElement">close_fullscreen</mat-icon></button>
       <!-- <span  class="icon-narrow" matTooltip="usuń"  (click)="delete(element,ind)" mat-raised-button color="basic"><mat-icon style="font-size:1.2em">delete_forever</mat-icon></span> -->

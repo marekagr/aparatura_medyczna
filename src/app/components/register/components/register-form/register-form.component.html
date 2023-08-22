@@ -1,1 +1,8 @@
-<p>register-form works!</p>
+<mat-toolbar>
+    <mat-toolbar-row>
+      <h3><span>{{(getCurrentId() ? 'Edycja urządzenia: ' : 'Nowe urządzenie ')}}</span><span>{{dealForm.controls['name'].value}}</span> </h3>
+      <span class="fill-remaining-space"></span>
+      <button class="btn-dialog-close" mat-stroked-button  mat-dialog-close tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar-row>
+  
+  </mat-toolbar>

@@ -8,6 +8,7 @@ const registerRoutes = require("./routes/register");
 const Register = require("./models/Register");
 const userRoutes = require("./routes/user");
 const employeeRoutes = require("./routes/employee");
+const opkRoutes = require("./routes/opk");
 // const groupRoutes = require("./routes/group");
 // const eventTypeRoutes = require("./routes/eventType");
 // const purposeRoutes = require("./routes/purpose");
@@ -90,6 +91,7 @@ app.use("/api1/rejestr", registerRoutes);
 app.use("/api1/uzytkownik", userRoutes);
 app.use("/api1/uprawnienia", grantsRoutes);
 app.use("/api1/pracownik", employeeRoutes);
+app.use("/api1/opk", opkRoutes);
 
 app.use((req, res, next) => {
   res.json([{id:1},{id:2}])
