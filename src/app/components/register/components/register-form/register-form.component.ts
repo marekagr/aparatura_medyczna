@@ -47,21 +47,20 @@ export class RegisterFormComponent implements OnInit{
         name:new FormControl(null,[Validators.required]),
         type:new FormControl(),
         sn: new FormControl(),
-
-        producer:new FormControl(),
+        producer:new FormControl(),        
         year_production: new FormControl(),
-        deal_service:new FormControl(),
-        opk:new FormControl(),
 
+        deal_service:new FormControl(),
         number_of_deal:new FormControl(),
         deal_old_service:new FormControl(),
+
         date_of_last_inspection:new FormControl(),
-
-        inventory_number:new FormControl(),
-        end_of_quarantee: new FormControl(),
         inspection_period: new FormControl(),
+        end_of_quarantee: new FormControl(),       
 
-        endate_of_last_inspectiond_of_quarantee:new FormControl(),
+        opk:new FormControl(),
+        inventory_number:new FormControl(),
+        
         comments:new FormArray([]),
 
 
@@ -183,5 +182,94 @@ createInfo(item:any): FormGroup {
   
     }
   }
-
+  onSubmit({ value, valid }: { value: any, valid: boolean }) {
+    console.log(value, valid);
+    const DateArray=['date_of_deal_start','date_of_deal_stop','date_of_sign','date_of_registration']
+    const DateArrArr=['changeDeal','terminationWithDeal','terminationRest']
+    // if(this.logBookForm.get('meter_reading_end').value-this.logBookForm.get('meter_reading_start').value-this.totalKm !=0){
+    //   alert(`Błąd, ilość km nieprawidłowa. Ilość km ze strony 1 (${this.logBookForm.get('meter_reading_end').value-this.logBookForm.get('meter_reading_start').value}km) niezgodna z sumą km ze strony 2 (${this.totalKm}km)`);
+    //   return;
+    // }
+    if(valid){
+  
+        // if(! this.data.isEdit){
+        //   this.petrolService.addPetrol(value).subscribe(data=>{
+        //     this.commonService.tellSomethingToParent(`Nowe paliwo ${value.name} zostało dopisane`);
+        //     this.dialogRef.close(data.petrolId);
+        //   })
+        // }
+        // else{
+        let dateOfBirth: Moment = moment(value.date_of_deal_start);
+        console.log('dateOfBirth',dateOfBirth.toObject().years)
+        DateArray.forEach(item=>{if(value[item]!=null) value[item]=this.utilityService.getParseUTCDate(value[item])})
+        DateArrArr.forEach(key=>{
+          console.log('key',key)
+          value[key].map((item:any)=>{
+            console.log('item',item,item['date'])
+            // value[item['date']]=this.utilityService.getParseUTCDate(value[item['date']])}
+            if(item['date']!=null)item['date']=this.utilityService.getParseUTCDate(item['date'])}
+        )})
+  
+  
+  
+  
+        // value.date_of_deal_start=this.utilityService.getParseUTCDate(value.date_of_deal_start);
+        // value.date_of_deal_stop =this.utilityService.getParseUTCDate(value.date_of_deal_stop);
+        if(typeof this.getCurrentId()=='undefined' || this.getCurrentId()==null)
+        {
+          this.registerService.addDeal(value).subscribe(data=>{
+            this.registerService.getregisterItems();
+            console.log(data)
+            this.registerService.setcurrentDealListener(data)
+            this.currentDeal=data
+            this.dealForm.get('own_number_of_deal')?.setValue(data.own_number_of_deal)
+             this.ref.detectChanges();
+            // this.commonService.tellSomethingToParent(`Zmiany dla ${value.name} zapisano`);
+            this.dialogRef.close(value);
+          })
+        }
+          else
+            this.registerService.updateDeal(this.getCurrentId(),value).subscribe(
+              data=>{
+            // this.commonService.tellSomethingToParent(`Zmiany zapisano`);
+             value['files']=this.attachments;
+             this.dialogRef.close(value);
+            // this.dialogRef.close({todo:'edit',value:value});
+              },
+              error=>{console.log('error save register',error);this.utilityService.openSnackBar(error.error,'zamknij',10000)}
+              )
+  
+        // }
+      // }
+  
+  
+      // this.serviceorderService.getServiceOrderPartsListener().subscribe(items=>value['parts']=items);
+      // this.serviceorderService.getServiceOrderActivitiesListener().subscribe(items=>value['activities']=items);
+      // value.date=this.commonService.getParseUTCDate(value.date);
+      // value.date_term=typeof value.date_term=='undefined'?value['date_term']=value.date:this.commonService.getParseUTCDate(value.date_term);
+      // value['carId']=this.currentCar._id;
+  
+      //  if(! this.data.isEdit){
+  
+      //   this.serviceorderService.addServiceOrder(value).subscribe(data=>{
+      //     console.log('onSubmit logBook',value,data);
+      //     this.commonService.tellSomethingToParent(`Nowa karta pojazdu została dopisana`);
+      //     this.dialogRef.close(data._id);
+      //   })
+      //  }
+      //  else{
+      //   const chosenCar:Car=this.cars.find(x=>x._id==value.carId);
+      //   const chosenEmployee:Employee=this.employees.find(x=>x._id==value.employeeId);
+      //   this.serviceorderService.updateServiceOrder(value._id,value).subscribe(data=>{
+      //     this.commonService.tellSomethingToParent(`Zmiany zapisano`);
+      //     value.employeeId=chosenEmployee;
+      //     value.carId=chosenCar;
+      //     // this.dialogRef.close(value);
+      //     this.dialogRef.close({todo:'edit',value:value});
+      //   })
+      //  }
+    }
+    else alert('Uwaga błędy w formularzu. Dane nie zapisane');
+  }
+  
 }

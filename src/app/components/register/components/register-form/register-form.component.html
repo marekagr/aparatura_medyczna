@@ -6,3 +6,247 @@
     </mat-toolbar-row>
   
   </mat-toolbar>
+
+  <form novalidate  [formGroup]="dealForm" (ngSubmit)="onSubmit(dealForm)">
+
+    <mat-tab-group animationDuration="0ms" style="height: 100%">
+  
+      <mat-tab label="Dane podstawowe" style="height: 100%">
+              <div class="mat__tab__content">
+  
+  
+  
+            <div class="item">
+              <fieldset>
+                <legend> Dane podstawowe </legend>
+  
+
+  
+                    <mat-form-field class="width20Procent">
+                      <mat-label>nazwa urządzenia</mat-label>
+                      <input matInput placeholder="nazwa urządzenia"  formControlName="name">
+                      </mat-form-field>
+  
+                    <mat-form-field class="width20Procent">
+                      <mat-label>typ</mat-label>
+                        <input matInput placeholder="typ"  formControlName="type">
+                    </mat-form-field>
+  
+                    <mat-form-field class="width20Procent">
+                      <mat-label>nr fabryczny</mat-label>
+                        <input matInput placeholder="nr fabryczny"  formControlName="sn">
+                      </mat-form-field>
+                    
+                      <mat-form-field class="width20Procent">
+                        <mat-label>producent</mat-label>
+                          <input matInput placeholder="producent"  formControlName="producer">
+                    </mat-form-field>
+
+                    <mat-form-field class="width10Procent">
+                      <mat-label>rok</mat-label>
+                        <input matInput placeholder="rok"  formControlName="year_production">
+                  </mat-form-field>
+                </fieldset>
+            </div>
+            <!-- <div class="item">
+              <fieldset>
+                <legend> Data i miejsce podpisania</legend>
+                    <mat-form-field class="width20Procent">
+                      <mat-label>data podpisania</mat-label>
+                      <input matInput [matDatepicker]="date_of_sign" formControlName="date_of_sign">
+                      <mat-datepicker-toggle matSuffix [for]="date_of_sign"></mat-datepicker-toggle>
+                      <mat-datepicker #date_of_sign></mat-datepicker>
+                    </mat-form-field>
+  
+                    <mat-form-field>
+                      <input matInput placeholder="miejsce podpisania"  formControlName="place_of_sign">
+                    </mat-form-field>
+  
+                    <mat-form-field appearance="fill" class="example-form-field">
+                      <mat-label>data obowiązywania od-do</mat-label>
+                      <mat-date-range-input [rangePicker]="date_of_issue_start_end">
+                        <input matStartDate placeholder="Data od" formControlName="date_of_deal_start">
+                        <input matEndDate placeholder="Data do" formControlName="date_of_deal_stop" >
+                      </mat-date-range-input>
+                      <mat-datepicker-toggle matSuffix [for]="date_of_issue_start_end"></mat-datepicker-toggle>
+                      <mat-date-range-picker #date_of_issue_start_end>
+                        <mat-date-range-picker-actions>
+                          <button mat-button matDateRangePickerCancel>Anuluj</button>
+                          <button mat-raised-button color="primary" matDateRangePickerApply>Wbierz</button>
+                        </mat-date-range-picker-actions>
+                      </mat-date-range-picker>
+                    </mat-form-field>
+              </fieldset>
+            </div> -->
+            <!-- <div class="item">
+              <fieldset>
+                <legend> Status i przedmiot umowy</legend>
+                      <mat-form-field>
+                        <mat-label>status</mat-label>
+                        <mat-select required formControlName="status"  panelClass="mat-select-panel--marek" (selectionChange)="changeStatus($event)" >
+                          <mat-option *ngFor="let item of statuses" [value]="item">
+                            {{item}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+  
+                      <mat-form-field class="widthx2">
+                        <textarea
+                          placeholder="przedmiot umowy"  formControlName="issue_of_deal"
+                          matInput
+                          cdkTextareaAutosize
+                          cdkAutosizeMinRows="1"
+                          cdkAutosizeMaxRows="6">
+                        </textarea>
+  
+  
+                      </mat-form-field>
+  
+                        <mat-form-field>
+                          <input matInput placeholder="wartość umowy"  formControlName="value_of_deal" digitOnly="" [decimal]=true decimalSeparator="." pattern="^\d+(\.\d{1,2})?$">
+                          <span matSuffix>zł</span>
+                        </mat-form-field>
+  
+                </fieldset>
+            </div> -->
+            <!-- <div class="item">
+              <fieldset>
+                <legend> Zgłoszenie</legend>
+  
+                    <mat-form-field class="mat-form-field--smaller">
+                      <mat-label>data zgłoszenia</mat-label>
+                      <input matInput [matDatepicker]="date_of_registration" formControlName="date_of_registration">
+                      <mat-datepicker-toggle matSuffix [for]="date_of_registration"></mat-datepicker-toggle>
+                      <mat-datepicker #date_of_registration></mat-datepicker>
+                    </mat-form-field>
+  
+                    <mat-form-field>
+                      <input matInput placeholder="jednostka zgłaszająca"  formControlName="registration_business_unit" [matAutocomplete]="registration_business_unit">
+                      <mat-autocomplete #registration_business_unit="matAutocomplete">
+                        <mat-option *ngFor="let option of registration_business_unit_options$ | async" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+  
+                    </mat-form-field>
+  
+                    <mat-form-field>
+                      
+                      <input matInput placeholder="osoba zgłaszająca"  formControlName="registration_person" [matAutocomplete]="registration_person">
+                      <mat-autocomplete #registration_person="matAutocomplete">
+                        <mat-option *ngFor="let option of employees" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+              </fieldset>
+            </div> -->
+            <!-- <div class="item">
+              <fieldset>
+                <legend> Strony umowy</legend>
+                <mat-form-field>
+                  <textarea
+                    placeholder="strona umowy 1"  formControlName="part1_of_deal"
+                    matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="6">
+                  </textarea>
+                </mat-form-field>
+  
+  
+                  <mat-form-field>
+                    <textarea
+                    placeholder="strona umowy 2"  formControlName="part2_of_deal"
+                    matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="6">
+                  </textarea>
+                 </mat-form-field>
+  
+              </fieldset>
+            </div> -->
+            <!-- <div class="item">
+              <fieldset>
+                <legend>Przedstawiciele stron umowy </legend>
+  
+                      <ng-container formArrayName="representative1_of_deal">
+                        <div [ngClass]="'representative'">
+                          <div style="flex-basis: 100%;margin-bottom: 1em;display: flex;">
+                            <button  type="button" mat-stroked-button matTooltip="dodaj"  (click)="addInfo('representative1_of_deal',{name:'',surname:''})"  class="color-redish"><mat-icon>person_add</mat-icon>&nbsp;dodaj osobę</button>
+                            <span style="flex-grow: 2;"></span>
+                            <button mat-mini-fab disabled >
+                              <mat-icon style="color:red">looks_one</mat-icon>
+                            </button>
+                          </div>
+                        <ng-container *ngFor="let opk of representative1_of_deal.controls; let i = index">
+  
+                            <div formGroupName="{{i}}" style="display:flex;flex-direction: row;">
+                             
+                              <mat-form-field>
+                                <input matInput formControlName="name" class="form-control" placeholder="Imię"/>
+                              </mat-form-field>
+                              <mat-form-field>
+                                <input matInput formControlName="surname" class="form-control" placeholder="Nazwisko"/>
+                              </mat-form-field>
+                              <span style="display: flex;"><button type="button" (click)="removeInfo('representative1_of_deal',i)"  mat-icon-button> <mat-icon>delete_forever</mat-icon></button></span>
+                            </div>
+  
+                        </ng-container>
+                      </div>
+                      </ng-container>
+  
+                      <ng-container formArrayName="representative2_of_deal">
+                        <div [ngClass]="'representative'">
+                          <div style="flex-basis: 95%;margin-bottom: 1em;display:flex">
+                            <button  type="button" mat-stroked-button matTooltip="dodaj"  (click)="addInfo('representative2_of_deal',{name:'',surname:''})"  class="color-redish"><mat-icon>person_add</mat-icon>&nbsp;dodaj osobę</button>
+                            <span style="flex-grow: 2;"></span>
+                            <button mat-mini-fab disabled aria-label="Example icon button with a home icon">
+                              <mat-icon style="color:red">looks_two</mat-icon>
+                            </button>
+                          </div>
+                        <ng-container *ngFor="let opk of representative2_of_deal.controls; let i = index">
+                            <div formGroupName="{{i}}" style="display:flex;flex-direction: row;">
+                              <mat-form-field>
+                                <input matInput formControlName="name" class="form-control" placeholder="Imię"/>
+                              </mat-form-field>
+                              <mat-form-field>
+                                <input matInput formControlName="surname" class="form-control" placeholder="Nazwisko"/>
+                              </mat-form-field>
+                              <span style="display: flex;"><button type="button" (click)="removeInfo('representative2_of_deal',i)"  mat-icon-button> <mat-icon>delete_forever</mat-icon></button></span>
+                            </div>
+                        </ng-container>
+                      </div>
+                      </ng-container>
+  
+              </fieldset>
+            </div> -->
+        </div>
+  
+  
+  
+  
+  
+      <div>
+        <mat-form-field class="invisible">
+          <input matInput type="text" formControlName="_id" >
+        </mat-form-field>
+        <mat-form-field class="invisible">
+          <input matInput type="text" formControlName="__v" >
+        </mat-form-field>
+  
+      </div>
+    </mat-tab>
+    
+  
+    <!-- <mat-tab label="Załączniki" [disabled]="dealForm.invalid || !currentDeal?._id"> -->
+    <!-- <mat-tab label="Załączniki" *ngIf="dealForm!=undefined && getCurrentId()!=null"> -->
+    <mat-tab label="Załączniki" *ngIf="dealForm!=undefined">
+      <!-- <fileupload  *ngIf="dealForm!=undefined" [config]="file_upload_config" [_id]="getCurrentId()" [formData]="dealForm" (onFormGroupChange)="onChange($event)"> </fileupload>
+      <attachment-list></attachment-list> -->
+    </mat-tab>
+  </mat-tab-group>
+  
+  
+  
+  <mat-dialog-actions style="display: flex; flex-flow: row;margin-top: 1em;border-top:1px solid black">
+    <button class="mat-raised-button" mat-dialog-close style="align-self: flex-start;">Zamknij</button>
+    <button mat-stroked-button type="submit" [color]="'greenish'"  [disabled]="dealForm.invalid" style="margin-left: auto;align-self: flex-start;">Zapisz</button>
+  </mat-dialog-actions>
+  
+  </form>

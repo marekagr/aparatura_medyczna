@@ -1,5 +1,208 @@
+$font-size-form-field: 1.3em;
+$font-size-legend: 1.2em;
+$font-color-legend: #127c69;
+$color-input : #492624;
+$color-h:#FFF;
+
+:host{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100%;
+  }
+
 .mat-mdc-unelevated-button>.mat-icon, .mat-mdc-raised-button>.mat-icon, .mat-mdc-outlined-button>.mat-icon {margin:0px}
 .mat-toolbar-row h3 {margin:0px;font-size: 1.1em;color: #fff;}
 .mat-toolbar-multiple-rows{background-color: #354d72}
 .mat-toolbar-multiple-rows{color:#fff}
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input{color:#000}
 span.mat-mdc-button-ripple{border-color: rgba(255,255,255,0.6);}
+
+form{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+::ng-deep .mat-mdc-tab-body-wrapper {
+    // Necessary to add this for tab body to be full height
+    flex-grow: 1;
+  }
+  
+// .mat-toolbar{
+//   border-bottom: thin dashed rgba(8, 8, 8, 0.6);
+//   margin-bottom: 0.5em;
+// }
+
+// .mat-toolbar-multiple-rows{
+//   background-color: transparent;
+
+// }
+// .mat-toolbar-row, .mat-toolbar-single-row{
+//   height: 70%;
+// }
+
+
+// .mat-toolbar.height100 .mat-toolbar-row,.mat-toolbar.height100 .mat-toolbar-single-row{
+//    height: 64px;
+// }
+
+div.mat__tab__content{
+  display:flex ;
+  flex-flow: row wrap;
+  padding: 15px 5px;
+  width: 99%;
+  position: relative;
+  height: auto;
+  margin: 0;
+  .item {
+    flex-grow: 1;
+    flex-basis: 40%;
+    margin: 10px;
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .item:empty {
+    height: 0;
+  }
+  fieldset
+  {
+    border: thin solid rgba(220,220,220,0.5);
+    border-radius: 5px;
+    max-width: 100%;
+    width: 100%;
+    padding: 5px;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    legend
+    {
+      font-size: $font-size-legend;
+      color:$font-color-legend;
+      margin-bottom:0px;
+      margin-left:16px;
+      padding: 0px 10px;
+    }
+
+    mat-form-field,.section--checkbox{
+      margin:0 5px;
+      font-size: $font-size-form-field;
+      color:$color-input;
+      flex-grow: 1;
+      flex-basis: 30%;
+    }
+    .width10Procent{
+        flex-basis: 10%
+      }
+    .width20Procent{
+      flex-basis: 20%
+    }
+    .widthx2{
+      flex-basis: 60%
+    }
+
+    .widthx3{
+      flex-basis: 90%
+    }
+
+    button.color-redish{
+      padding: 0 0.5em;
+      color:#8e3247
+    }
+    .representative{
+      padding:5px;display: flex;flex-direction: column;flex-basis: 50%;align-self: flex-start;
+    }
+    .representative:first-of-type{
+      border-right:thin dashed rgba(30, 30, 30, 0.20);
+    }
+    .changeDeal{
+      padding:5px;display: flex;flex-direction: column;flex-basis: 100%;align-self: flex-start;
+    }
+    .width80px {
+      width:80px
+    }
+  }
+
+
+
+
+
+  .section--checkbox{
+    display: block;
+  }
+  // .section--checkbox option{
+  //    color:$color-input
+  // }
+  .mat-select-value{
+    color:$color-input
+  }
+
+  .mat-tab-label-content{
+    color: #000;
+  }
+
+
+}
+
+
+h3{text-align: center;}
+h3 span:nth-last-of-type(2n+1){font-size: 1.2em;color:$color-h;}
+h3 span:nth-last-of-type(2n+0){font-size: 0.8em;}
+h4 {color:$color-h}
+.mat-toolbar-row, .mat-toolbar-single-row{background-color: transparent;}
+.mat-form-field-appearance-fill, .mat-form-field-flex { padding: 0px;}
+
+.mat-grid-tile {margin: 5px 0px;}
+.mat-grid-tile .mat-figure{
+  align-items: flex-start;
+}
+
+.invisible{
+  display: block;
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
+.select--time{
+  width: 58%;text-align: right;
+}
+
+
+
+:host ::ng-deep .mat-tab-body-wrapper {
+  height: 640px;
+
+}
+
+:host ::ng-deep .mat-tab-body.mat-tab-body-active {
+  height: 640px;
+
+}
+
+.active{
+  opacity: 1;
+  border: none;
+  background-color: transparent;
+}
+.inactive{
+  opacity: 0.4;
+  border: none;
+  background-color: transparent;
+}
+.active  span,.inactive span {
+  border: none;
+  background-color: transparent;
+}
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: rgba(255,255,255,1);
+  padding: 0px;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-prefix .mat-datepicker-toggle-default-icon{
+  width: 1em;
+}
+
+.mat-grid-class{
+  border:thin solid #999
+}
