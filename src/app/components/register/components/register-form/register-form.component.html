@@ -18,7 +18,7 @@
   
             <div class="item">
               <fieldset>
-                <legend> Dane podstawowe </legend>
+                <legend> Dane urządzenia </legend>
   
 
   
@@ -47,6 +47,109 @@
                         <input matInput placeholder="rok"  formControlName="year_production">
                   </mat-form-field>
                 </fieldset>
+            </div>
+
+            <div class="item">
+              <fieldset>
+                <legend> Serwis </legend>
+  
+                    <mat-form-field class="width20Procent">
+                      <mat-label>umowa serwisowa</mat-label>
+                      <input matInput placeholder="umowa serwisowa "  formControlName="deal_service">
+                      </mat-form-field>
+  
+                    <mat-form-field class="width20Procent">
+                      <mat-label>nr umowy</mat-label>
+                        <input matInput placeholder="nr umowy"  formControlName="number_of_deal">
+                    </mat-form-field>
+  
+                    <mat-form-field class="width20Procent">
+                      <mat-label>stary serwis</mat-label>
+                        <input matInput placeholder="stary serwis"  formControlName="deal_old_service">
+                      </mat-form-field>
+                    
+                   
+                </fieldset>
+            </div>
+
+            
+            <div class="item">
+              <fieldset>
+                <legend>Gwarancja/Przeglądy </legend>
+  
+                <mat-form-field class="width20Procent">
+                  <mat-label>data podpisania</mat-label>
+                  <input matInput [matDatepicker]="date_of_last_inspection" formControlName="date_of_last_inspection">
+                  <mat-datepicker-toggle matSuffix [for]="date_of_last_inspection"></mat-datepicker-toggle>
+                  <mat-datepicker #date_of_last_inspection></mat-datepicker>
+                </mat-form-field>
+  
+                <mat-form-field class="width20Procent">
+                      <mat-label>przeglądy - okres</mat-label>
+                        <input matInput placeholder="przeglądy - okres"  formControlName="number_of_deal">
+                </mat-form-field>
+  
+                <mat-form-field class="width20Procent">
+                      <mat-label>data podpisania</mat-label>
+                      <input matInput [matDatepicker]="end_of_quarantee" formControlName="end_of_quarantee">
+                      <mat-datepicker-toggle matSuffix [for]="end_of_quarantee"></mat-datepicker-toggle>
+                      <mat-datepicker #end_of_quarantee></mat-datepicker>
+                </mat-form-field>                                       
+                </fieldset>
+            </div>
+
+            <div class="item">
+              <fieldset>
+                <legend>Dane szpitalne</legend>
+  
+                <mat-form-field>
+                  <mat-label>Oddział</mat-label> 
+                  <input matInput placeholder="wybierz oodział"  formControlName="opk" [matAutocomplete]="opk">
+                  <mat-autocomplete #opk="matAutocomplete">
+                    <mat-option *ngFor="let option of opks" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+  
+                <mat-form-field class="width20Procent">
+                      <mat-label>przeglądy - okres</mat-label>
+                        <input matInput placeholder="przeglądy - okres"  formControlName="number_of_deal">
+                </mat-form-field>
+  
+                <mat-form-field class="width20Procent">
+                  <mat-label>nr inwentarzowy</mat-label>
+                    <input matInput placeholder="nr inwentarzowy"  formControlName="inventory_number">
+               </mat-form-field>                                      
+                </fieldset>
+            </div>
+            
+            <div class="item">
+              <fieldset>
+                <legend>Uwagi </legend>
+                      <ng-container formArrayName="comments">
+                        <div [ngClass]="'changeDeal'">
+                          <div style="flex-basis: 100%;margin-bottom: 1em;display: flex;">
+                            <button  type="button" mat-stroked-button matTooltip="dodaj"  (click)="addInfo('comments',newInfo)"  class="color-redish"><mat-icon>event_note</mat-icon>&nbsp;dodaj</button>
+                          </div>
+                        <ng-container *ngFor="let comment of comments.controls; let i = index">
+      
+                            <div formGroupName="{{i}}" style="display:flex;flex-direction: row;">
+      
+      
+                              <mat-form-field [ngClass]="'widthx3'">
+                                <textarea
+                                placeholder="uwagi"  formControlName="comment"
+                                matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="6">
+                              </textarea>
+                              </mat-form-field>
+
+                              <span style="display: flex;"><button type="button" (click)="removeInfo('changeDeal',i)"  mat-icon-button> <mat-icon>delete_forever</mat-icon></button></span>
+                            </div>
+                        </ng-container>
+                      </div>
+                      </ng-container>
+              </fieldset>
             </div>
             <!-- <div class="item">
               <fieldset>

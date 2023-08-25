@@ -1,6 +1,6 @@
 $font-size-form-field: 1.3em;
 $font-size-legend: 1.2em;
-$font-color-legend: #127c69;
+$font-color-legend: #354d72;
 $color-input : #492624;
 $color-h:#FFF;
 
@@ -58,7 +58,7 @@ div.mat__tab__content{
   margin: 0;
   .item {
     flex-grow: 1;
-    flex-basis: 40%;
+    // flex-basis: 40%;
     margin: 10px;
     display: flex;
     flex-flow: row wrap;
@@ -83,6 +83,7 @@ div.mat__tab__content{
       margin-bottom:0px;
       margin-left:16px;
       padding: 0px 10px;
+      font-weight: 600;
     }
 
     mat-form-field,.section--checkbox{

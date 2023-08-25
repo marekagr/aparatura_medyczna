@@ -25,6 +25,7 @@ import { RegisterFormComponent } from './components/register/components/register
 import { AttachmentListComponent } from './components/register/components/attachment-list/attachment-list.component';
 import { LoginComponent } from './components/auth/components/login/login.component';
 import { ProducerComponent } from './components/directory/producer/components/producer/producer.component';
+import { OpkComponent } from './components/directory/opk/components/opk/opk.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProducerComponent } from './components/directory/producer/components/pr
     RegisterFormComponent,
     AttachmentListComponent,
     LoginComponent,
-    ProducerComponent
+    ProducerComponent,
+    OpkComponent
   ],
   imports: [
     BrowserModule,

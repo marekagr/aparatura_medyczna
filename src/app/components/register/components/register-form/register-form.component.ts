@@ -9,6 +9,8 @@ const moment = _moment;
 import { RegisterService } from "../../services/register.service";
 import { UtilityService } from '../../../../common/services/utility.service';
 import { AttachmentService } from "../../services/attachment.service";
+import { OpkService } from "../../../directory/opk/services/opk.service";
+import { Opk } from "../../../directory/opk/models/Opk";
 // import { EmployeeService } from "../../../employee/services/employee.service";
 import { Deal } from "../../models/Deal";
 // import { Employee } from "../../../employee/models/Employee";
@@ -26,11 +28,15 @@ export class RegisterFormComponent implements OnInit{
   dealForm!:FormGroup;
   public producers:string[]=[];
   public producersAll:string[]=[];
+  private isFirstGet={opk:true}
+  opkAll: Opk[] = [];
+  opks: string[] = [];
+  private opks$?: Subscription;
   get comments(): FormArray {
     return this.dealForm.get('comments') as FormArray;
   }
   getCurrentId():string{return this.currentDeal?._id}
-
+  newInfo={info:''}
   file_upload_config = {
     API: `${this.utilityService.getAPI('file_upload')}/rejestr/pliki/`,
     MIME_types_accepted: "application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,image/jpeg",
@@ -38,7 +44,7 @@ export class RegisterFormComponent implements OnInit{
     data: ''
   };
 
-  constructor(public attachmentService: AttachmentService,private utilityService: UtilityService,private ref: ChangeDetectorRef,private formBuilder: FormBuilder,public registerService: RegisterService,private dialog: MatDialog,private dialogRef: MatDialogRef<RegisterFormComponent>,
+  constructor(public attachmentService: AttachmentService,private utilityService: UtilityService,public opkService:OpkService,private ref: ChangeDetectorRef,private formBuilder: FormBuilder,public registerService: RegisterService,private dialog: MatDialog,private dialogRef: MatDialogRef<RegisterFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any) {
       // this.getData()
       console.log('data',data)
@@ -82,7 +88,23 @@ export class RegisterFormComponent implements OnInit{
       this.attachments=items
       //this.ref.detectChanges();
     });
-   
+
+
+    this.dealForm?.get('opk')!.valueChanges.pipe(
+      startWith(''),
+      map(value =>  this.utilityService.filterAutocomplete(value,this.opkAll.map(item=>item.name)))
+      // this._registration_business_unit_filter(value)),
+    ).subscribe(items=>this.opks=items);
+
+    if(this.opkAll.length==0 && this.isFirstGet.opk){
+      this.isFirstGet.opk=false;
+      this.opkService.getOpks();
+    }
+    this.opks$ = this.opkService.getOpks$()
+      .subscribe((opks: Opk[]) => {
+        this.opkAll = opks;
+        console.log('opk',this.opkAll)
+    })
 
     this.dealForm?.get('producer')!.valueChanges.pipe(
       startWith(''),
@@ -132,9 +154,18 @@ createInfo(item:any): FormGroup {
   return
   },{})
 
-
   return this.formBuilder.group(h);
 }
+
+
+addInfo(controlName:string,data:any){
+  (<FormArray>(this.dealForm.get(controlName))).push(this.createInfo(data))
+}
+
+removeInfo(controlName:string,index:number){
+  (<FormArray>(this.dealForm.get(controlName))).removeAt(index)
+}
+
   addToFormArray(){
     if(! this.currentDeal._id){
         [{name:'Krzysztof',surname:'Stolarski'}].forEach(item => {
