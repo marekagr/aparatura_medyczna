@@ -8,6 +8,7 @@ import { User } from "../models/User";
 import { CurrentUser } from "../models/CurrentUser";
 import { GrantMenu } from "../models/GrantMenu";
 import { GrantDirectory } from "../models/GrantDirectory";
+import {Column} from "../models/Column"
 // import {AlertService} from "../../../components/alert/services/alert.service"
 const httpOptionsText={headers:new HttpHeaders({'Content-Type':  'text/plain'})};
 
@@ -36,6 +37,7 @@ export class AuthService {
   public user$ = new BehaviorSubject<User[]>([]);
   public grantMenu$ = new BehaviorSubject<GrantMenu[]>([]);
   public grantDirectory$ = new BehaviorSubject<GrantDirectory[]>([]);
+  public column$ = new BehaviorSubject<Column[]>([]);
 
   createUser(user: string, password: string) {
     const url = `${this.globalUrl}/uzytkownik/dodaj`;
@@ -64,6 +66,33 @@ export class AuthService {
   getGrantDirectory() {
     const url = `${this.globalUrl}/uprawnienia/slowniki`;
    this.http.get<GrantDirectory[]>(url).subscribe(data=>this.grantDirectory$.next([...data]))
+  }
+
+  getColumn() {
+    const url = `${this.globalUrl}/uprawnienia/kolumny`;
+    this.http.get<Column[]>(url).subscribe(data=>this.column$.next([...data]))
+  }
+
+  getColumn$(){
+    return this.column$.value
+  }
+
+  getColumnValueByField(kolumna:string,wartosc:string):string{
+    let columns=this.getColumn$()
+    let nazwa:string=''
+    columns.some((item,idx)=>{
+      if(item[kolumna as keyof Column]==wartosc)nazwa=item.viewValue
+    })
+    return nazwa
+  }
+
+
+  setcolumnListByUser(currentUser:User,columnList:Column[]){
+    columnList.forEach(column=>column.activated=false)
+    currentUser?.column?.forEach((id:string)=>{
+      const index=columnList.findIndex(item=>item.id==id)
+      if(index>-1)columnList[index]["activated"]=true;
+    })
   }
 
   updateUser(id:string,user:User):Observable<User>{
@@ -100,6 +129,12 @@ export class AuthService {
       // });
   }
 
+  getUserById(id:string):Observable<any>{
+    const url = `${this.globalUrl}/uzytkownik/${id}`;
+    return this.http.get<User>(url)
+
+  }
+
   saveUserStorage(response:any){
 
     const token = response.token;
@@ -115,11 +150,22 @@ export class AuthService {
       console.log(expirationDate);
       const grantMenu:any[]=this.getGrants(response.user.grantMenu,'grantMenuId')
       const grantDirectory:any[]=this.getGrants(response.user.grantDirectory,'grantDirectoryId')
-      const currentUser:CurrentUser={user:response.user.user,_id:response.user._id,token:token,expirationDate:expirationDate,grantMenu:grantMenu,grantDirectory:grantDirectory}
+      const column:any[]=this.getGrants(response.user.column,'columnId','id')
+      const currentUser:CurrentUser={user:response.user.user,_id:response.user._id,token:token,expirationDate:expirationDate,grantMenu:grantMenu,grantDirectory:grantDirectory,column:column}
+     // const currentUser:CurrentUser={user:response.user.user,_id:response.user._id,token:token,expirationDate:expirationDate,grantMenu:grantMenu,grantDirectory:grantDirectory}
       this.currentUserSubject$.next(currentUser);
       this.saveAuthData(token, expirationDate,grantMenu,currentUser);
       this.router.navigate(["/"]);
     }
+  }
+
+  public saveCurrentUserSubjectByUser(user:any){
+    const grantMenu:any[]=this.getGrants(user.grantMenu,'grantMenuId')
+    const grantDirectory:any[]=this.getGrants(user.grantDirectory,'grantDirectoryId')
+    const column:any[]=this.getGrants(user.column,'columnId','id')
+    const currentUser:CurrentUser={user:user.user,_id:user._id,token:localStorage.getItem("token") as string,expirationDate:new Date(localStorage.getItem('expiration') as string),grantMenu:grantMenu,grantDirectory:grantDirectory,column:column}
+   // const currentUser:CurrentUser={user:response.user.user,_id:response.user._id,token:token,expirationDate:expirationDate,grantMenu:grantMenu,grantDirectory:grantDirectory}
+    this.currentUserSubject$.next(currentUser);   
   }
 
   logout() {
@@ -169,8 +215,8 @@ export class AuthService {
     this.setAuthTimer(this.expiresInDuration)
   }
 
-  private getGrants(arr:[],field:string):any[]{
-    const result=arr.map(x=>x[field]['name'])
+  private getGrants(arr:[],field:string,field2:string='name'):any[]{
+    const result=arr.map(x=>x[field][field2])
     return result
   }
 

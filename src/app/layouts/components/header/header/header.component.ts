@@ -16,7 +16,8 @@ import {AuthService} from "../../../../components/auth/services/auth.service"
 import {CurrentUser} from "../../../../components/auth/models/CurrentUser"
 import {UtilityService} from "../../../../common/services/utility.service"
 import { AttachmentService } from "../../../../common/services/attachment.service";
-
+import {Column} from "../../../../components/auth/models/Column"
+import { User } from 'src/app/components/auth/models/User';
 
 @Component({
   selector: 'app-header',
@@ -30,18 +31,35 @@ export class HeaderComponent {
   labelPosition: 'before' | 'after' = 'before'
   dialogRegisterFormRef: MatDialogRef<RegisterFormComponent> | undefined
   toppings = new FormControl('');
-  columnList: any[] = 
-    [{id:'name',viewValue:'Nazwa Urządzenia',activated:true}, {id:'type',viewValue:'Typ',activated:true},{id:'sn',viewValue:'Numer fabryczny',activated:true},{id:'producer',viewValue:'Producent',activated:true},
-    {id:'year_production',viewValue:'Rok',activated:true},{id:'deal_service',viewValue:'Serwis',activated:true},{id:'number_of_deal',viewValue:'Nr umowy',activated:true},
-    {id:'deal_old_service',viewValue:'Stary serwis',activated:false},{id:'opk',viewValue:'Oddział',activated:true},{id:'date_of_last_inspection',viewValue:'Data przeglądu',activated:true},
-    {id:'inventory_number',viewValue:'Numer inwentarzowy',activated:true},{id:'end_of_quarantee',viewValue:'Koniec gwarancji',activated:true},{id:'inspection_period',viewValue:'Przegląd okres',activated:true},
-    {id:'do',viewValue:'Wykonaj',activated:true}
-    ]
+  public  columnList: Column[]=[];
+  // columnList: any[] = 
+  //   [{id:'name',viewValue:'Nazwa Urządzenia',activated:true}, {id:'type',viewValue:'Typ',activated:true},{id:'sn',viewValue:'Numer fabryczny',activated:true},{id:'producer',viewValue:'Producent',activated:true},
+  //   {id:'year_production',viewValue:'Rok',activated:true},{id:'deal_service',viewValue:'Serwis',activated:true},{id:'number_of_deal',viewValue:'Nr umowy',activated:true},
+  //   {id:'deal_old_service',viewValue:'Stary serwis',activated:false},{id:'opk',viewValue:'Oddział',activated:true},{id:'date_of_last_inspection',viewValue:'Data przeglądu',activated:true}
+  //   ,{id:'date_of_next_inspection',viewValue:'Data następnęgo przeglądu',activated:true},
+  //   {id:'inventory_number',viewValue:'Numer inwentarzowy',activated:true},{id:'end_of_quarantee',viewValue:'Koniec gwarancji',activated:true},{id:'inspection_period',viewValue:'Przegląd okres',activated:true},
+  //   {id:'do',viewValue:'Wykonaj',activated:true}
+  //   ]
   private selectedColums: any[] = [];
   
   constructor(public utilityService:UtilityService,public authService:AuthService,public attachmentService: AttachmentService,public registerService: RegisterService,private activeRoute: ActivatedRoute,private router: Router,private dialog: MatDialog) {
-    this.authService.currentUser$.subscribe(x => this.currentUser = x!);
-    this.registerService.setcolumnList$(this.columnList);
+    this.authService.currentUser$.subscribe(x => {
+      this.currentUser = x!
+      console.log('header user',this.currentUser)
+      if(this.currentUser && typeof this.currentUser.column !='undefined' && typeof this.columnList !='undefined'){
+        this.authService.setcolumnListByUser(this.currentUser as User,this.columnList);
+        this.registerService.setcolumnList$(this.columnList);
+      }
+    });
+    if(this.columnList.length==0 && this.authService.getColumn$().length==0){      
+      this.authService.getColumn();
+    }
+    this.authService.column$.subscribe(x => {
+      this.columnList = x
+      if(this.currentUser && typeof this.currentUser.column !='undefined')this.authService.setcolumnListByUser(this.currentUser as User,this.columnList);
+      this.registerService.setcolumnList$(this.columnList);
+    });
+    
     
    }
 
@@ -169,5 +187,12 @@ export class HeaderComponent {
     this.registerService.setcolumnList$(this.selectedColums)
   }
 
+  // setcolumnListByUser(){
+  //   this.columnList.forEach(column=>column.activated=false)
+  //   this.currentUser?.column?.forEach(column=>{
+  //     const index=this.columnList.findIndex(item=>item.id==column)
+  //     if(index>-1)this.columnList[index]["activated"]=true;
+  //   })
+  // }
   
 }

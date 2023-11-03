@@ -388,6 +388,13 @@ export class UtilityService extends AppDictionaryService{
     return { first: firstDay, last: lastDay }
   }
 
+  addPeriodInspectionToDate(data:Date,inspection_period:string):Date{
+    let periods=inspection_period.split(':')
+    let result:Date=data
+    result.setFullYear(data.getFullYear()+Number(periods[0]),data.getMonth()+Number(periods[1]),data.getDate()+Number(periods[2]))
+    return result
+  }
+
   onFileLoad(result:any):any[] {
     // const textFromFileLoaded = fileLoadedEvent.target.result;
     // this.csvContent = textFromFileLoaded;
@@ -434,6 +441,34 @@ export class UtilityService extends AppDictionaryService{
   filterAutocomplete(value:string,arr:any[]):string[]{
     const filterValue = value.toLowerCase();
     return arr.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  howManyDays(czas:number):any{
+    //return czas;
+    if(czas==null)return ''
+    let currentTime=new Date().getTime();
+    let tournamentTime=new Date(czas).getTime();
+    if(tournamentTime>currentTime){
+      var delta = Math.abs(tournamentTime - currentTime) / 1000;
+      // calculate (and subtract) whole days
+      var days = Math.floor(delta / 86400);
+      delta -= days * 86400;
+      var hours = Math.floor(delta / 3600) % 24;
+      delta -= hours * 3600;
+      // return '<span class="colorblack displayBlock"><small>pozostało:</small></span><span class="colorpink">'+days+"dni "+hours+"godz.</span>";
+      return days
+    }
+    else
+    {
+      var delta = Math.abs(currentTime - tournamentTime) / 1000;
+      // calculate (and subtract) whole days
+      var days = Math.floor(delta / 86400);
+      delta -= days * 86400;
+      var hours = Math.floor(delta / 3600) % 24;
+      delta -= hours * 3600;
+      // return '<span class="colorblack displayBlock"><small>minęło:</small></span><span class="colorpink">'+days+"dni "+hours+"godz.</span>";
+      return -days;
+    }
   }
 
 }

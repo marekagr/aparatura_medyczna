@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const GrantMenu = require("../models/GrantMenu");
 const GrantDirectory = require("../models/GrantDirectory");
+const Column = require("../models/Column");
 
 const router = express.Router();
 
@@ -42,11 +43,12 @@ router.post("/dodaj", (req, res, next) => {
 
 router.put("/:id", (req, res, next) => {
   const user=JSON.parse(req.body);
-  // console.log('put petrol',category);
-  User.findByIdAndUpdate({ _id: req.params.id },user).then(data=>{
+  console.log('put user',user);
+  User.findByIdAndUpdate({ _id: req.params.id },user,{new:true}).then(data=>{
     // console.log('put',data);
     res.status(200).json(data)
   })
+  // res.status(200).json(user)
 });
 
 router.put("/zmiana-hasla/:id", (req, res, next) => {
@@ -67,11 +69,14 @@ router.put("/zmiana-hasla/:id", (req, res, next) => {
   // })
 });
 
+
+
+
 router.post("/login", (req, res, next) => {
   let fetchedUser;
   console.log(req.body)
   const body=req.body;
-  User.findOne({ user: body.user }).populate({path:'grantMenu.grantMenuId'} ).populate({path:'grantDirectory.grantDirectoryId'})
+  User.findOne({ user: body.user }).populate({path:'grantMenu.grantMenuId'} ).populate({path:'grantDirectory.grantDirectoryId'}).populate({path:'column.columnId'})
     .then(user => {
       if (!user) {
         return res.status(401).json({
@@ -96,7 +101,7 @@ router.post("/login", (req, res, next) => {
       res.status(200).json({
         token: token,
         expiresIn: 28800,
-        user: {user:fetchedUser.user,_id:fetchedUser._id,grantMenu:fetchedUser.grantMenu,grantDirectory:fetchedUser.grantDirectory},
+        user: {user:fetchedUser.user,_id:fetchedUser._id,grantMenu:fetchedUser.grantMenu,grantDirectory:fetchedUser.grantDirectory,column:fetchedUser.column},
 
       });
     })
@@ -106,6 +111,39 @@ router.post("/login", (req, res, next) => {
         message: `Błąd - nieprawidłowy użytkownik lub hasło`
       });
     });
+});
+
+router.get("/:id", (req, res, next) => {
+ 
+User.findOne({ _id: req.params.id }).populate({path:'grantMenu.grantMenuId'} ).populate({path:'grantDirectory.grantDirectoryId'}).populate({path:'column.columnId'})
+.then(user => {
+  if (!user) {
+    return res.status(401).json({
+      message: "Nieprawidłowy użytkownik lub hasło !"
+    });
+  }
+  fetchedUser = user;
+  console.log('fetchedUser',fetchedUser)
+  const token = jwt.sign(
+    { user: fetchedUser.user, userId: fetchedUser._id },
+    "secret_this_should_be_longer",
+    { expiresIn: "8h" }
+  );
+  res.status(200).json({
+    token: token,
+    expiresIn: 28800,
+    user: {user:fetchedUser.user,_id:fetchedUser._id,grantMenu:fetchedUser.grantMenu,grantDirectory:fetchedUser.grantDirectory,column:fetchedUser.column},
+
+  });
+})
+.catch(err => {
+  console.log(err)
+  return res.status(401).json({
+    message: `Błąd - nieprawidłowy użytkownik lub hasło`
+  });
+});
+
+
 });
 
 module.exports = router;

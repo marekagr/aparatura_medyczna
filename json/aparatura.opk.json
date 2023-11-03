@@ -1,0 +1,896 @@
+[{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5bc"
+  },
+  "opk": "500-0010-01",
+  "name": "P. nocnej i świątecznej opieki zdrowotnej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5bd"
+  },
+  "opk": "501-1030-01",
+  "name": "P. endokrynologiczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5be"
+  },
+  "opk": "501-1050-01",
+  "name": "P. gastroenterologiczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5bf"
+  },
+  "opk": "501-1100-01",
+  "name": "P. kardiologiczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5c0"
+  },
+  "opk": "501-1220-01",
+  "name": "P. neurologiczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5c1"
+  },
+  "opk": "501-1222-01",
+  "name": "P. leczenia bólu"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5c2"
+  },
+  "opk": "501-1240-01",
+  "name": "P. onkologiczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5c3"
+  },
+  "opk": "501-1244-01",
+  "name": "P. radioterapii"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5c4"
+  },
+  "opk": "501-1280-01",
+  "name": "P. reumatologiczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5c5"
+  },
+  "opk": "501-1450-01",
+  "name": "P. ginekologiczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5c6"
+  },
+  "opk": "501-1500-01",
+  "name": "P. chirurgii ogólnej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5c7"
+  },
+  "opk": "501-1501-01",
+  "name": "P. chirurgii dzieci"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5c8"
+  },
+  "opk": "501-1540-01",
+  "name": "P. chirurgii onkologicznej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5c9"
+  },
+  "opk": "501-1580-01",
+  "name": "P. ortopedyczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5ca"
+  },
+  "opk": "501-1600-01",
+  "name": "P. okulistyczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5cb"
+  },
+  "opk": "501-1610-01",
+  "name": "P. otolaryngologiczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5cc"
+  },
+  "opk": "501-1616-01",
+  "name": "P. logopedyczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5cd"
+  },
+  "opk": "501-1630-01",
+  "name": "P. chirurgii szczękowo–twarzowej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5ce"
+  },
+  "opk": "501-1640-01",
+  "name": "P. urologiczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5cf"
+  },
+  "opk": "503-4902-01",
+  "name": "Szpitalny oddział ratunkowy (ryczałt)"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5d0"
+  },
+  "opk": "504-4000-01",
+  "name": "O. chorób wewnętrznych i gastroenterologii"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5d1"
+  },
+  "opk": "504-4100-01",
+  "name": "O. kardiologiczny z intensywnym nadzorem kardiologicznym"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5d2"
+  },
+  "opk": "504-4220-01",
+  "name": "O. neurologii z pododdziałem udarowym"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5d3"
+  },
+  "opk": "504-4240-01",
+  "name": "O. onkologii klinicznej - onkologia"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5d4"
+  },
+  "opk": "504-4242-01",
+  "name": "O. onkologii klinicznej - chemioterapia"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5d5"
+  },
+  "opk": "504-4260-01",
+  "name": "O. intensywnej terapii OIT (7 łóżek)"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5d6"
+  },
+  "opk": "504-4280-01",
+  "name": "O. reumatologiczny"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5d7"
+  },
+  "opk": "504-4401-01",
+  "name": "O. pediatryczny"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5d8"
+  },
+  "opk": "504-4421-01",
+  "name": "O. neonatologiczny"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5d9"
+  },
+  "opk": "504-4452-01",
+  "name": "O. ginekologiczny"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5da"
+  },
+  "opk": "504-4456-01",
+  "name": "O. położniczy"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5db"
+  },
+  "opk": "504-4500-01",
+  "name": "O. chirurgii ogólnej z pododdziałem chirurgii onkologicznej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5dc"
+  },
+  "opk": "504-4501-01",
+  "name": "O. chirurgii dziecięcej i urazowej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5dd"
+  },
+  "opk": "504-4580-01",
+  "name": "O. ortopedii i traumatologii narządu ruchu"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5de"
+  },
+  "opk": "504-4600-01",
+  "name": "O. okulistyczny"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5df"
+  },
+  "opk": "504-4610-01",
+  "name": "O. otolaryngologiczny z pododdziałem chirurgii szczękowo-twarzowej oraz otolaryngologii dziecięcej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5e0"
+  },
+  "opk": "507-1160-01",
+  "name": "Poradnia medycyny pracy"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5e1"
+  },
+  "opk": "507-4106-01",
+  "name": "OIOK przy o.kardiologicznym"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5e2"
+  },
+  "opk": "507-4902-01",
+  "name": "SOR konsultacyjny"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5e3"
+  },
+  "opk": "507-4902-02",
+  "name": "SOR proceduralny"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5e4"
+  },
+  "opk": "507-4910-01",
+  "name": "Blok operacyjny - chirurgia/ogólna,field2:onkologiczna"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5e5"
+  },
+  "opk": "507-4910-02",
+  "name": "Blok operacyjny - ginekologia"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5e6"
+  },
+  "opk": "507-4910-03",
+  "name": "Blok operacyjny - ortopedia"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5e7"
+  },
+  "opk": "507-4910-04",
+  "name": "Blok operacyjny - okulistyka"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5e8"
+  },
+  "opk": "507-4910-05",
+  "name": "Blok operacyjny - otolaryngologia"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5e9"
+  },
+  "opk": "507-4910-11",
+  "name": "Blok operacyjny - kardiologia"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5ea"
+  },
+  "opk": "507-4910-13",
+  "name": "Sala wybudzeń"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5eb"
+  },
+  "opk": "507-4911-01",
+  "name": "Blok operacyjny dzieci - chirurgia"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5ec"
+  },
+  "opk": "507-4912-01",
+  "name": "Trakt porodowy"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5ed"
+  },
+  "opk": "507-4912-02",
+  "name": "Sala cięć cesarskich"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5ee"
+  },
+  "opk": "507-4950-01",
+  "name": "Anestezjologia (znieczulenia) I"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5ef"
+  },
+  "opk": "507-4950-02",
+  "name": "Anestezjologia (znieczulenia) II"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5f0"
+  },
+  "opk": "507-7130-01",
+  "name": "Pracownia immunologii transfuzjologicznej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5f1"
+  },
+  "opk": "507-7210-01",
+  "name": "Pracownia USG"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5f2"
+  },
+  "opk": "507-7220-01",
+  "name": "Pracownia tomografii komputerowej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5f3"
+  },
+  "opk": "507-7240-01",
+  "name": "Pracownia diagnostyki obrazowej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5f4"
+  },
+  "opk": "507-7242-01",
+  "name": "Pracownia mammografii"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5f5"
+  },
+  "opk": "507-7250-01",
+  "name": "Pracownia rezonansu magnetycznego"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5f6"
+  },
+  "opk": "507-7300-01",
+  "name": "Zakład patomorfologii"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5f7"
+  },
+  "opk": "507-7400-01",
+  "name": "Zakład rehabilitacji i fizykoterapii"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5f8"
+  },
+  "opk": "507-7910-01",
+  "name": "Pracownia diagnostyki endoskopowej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5f9"
+  },
+  "opk": "507-7960-01",
+  "name": "Zakład radioterapii"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5fa"
+  },
+  "opk": "507-7998-09",
+  "name": "Pracownia echokardiografii i diagnostyki elektrokardiologicznej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5fb"
+  },
+  "opk": "507-9600-01",
+  "name": "Punkt szczepień"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5fc"
+  },
+  "opk": "508-7130-01",
+  "name": "Pracownia immunologii transfuzjologicznej - UZ - NFZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5fd"
+  },
+  "opk": "508-7220-01",
+  "name": "Pracownia tomografii komputerowej - UZ - NFZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5fe"
+  },
+  "opk": "508-7240-01",
+  "name": "Pracownia diagnostyki obrazowej - UZ - NFZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b5ff"
+  },
+  "opk": "508-7242-01",
+  "name": "Pracownia mammografii - UZ - NFZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b600"
+  },
+  "opk": "508-7250-01",
+  "name": "Pracownia rezonansu magnetycznego - UZ - NFZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b601"
+  },
+  "opk": "508-7300-01",
+  "name": "Zakład patomorfologii - UZ - NFZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b602"
+  },
+  "opk": "508-7400-01",
+  "name": "Zakład rehabilitacji i fizykoterapii - UZ - NFZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b603"
+  },
+  "opk": "508-7910-01",
+  "name": "Pracownia diagnostyki endoskopowej - UZ - NFZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b604"
+  },
+  "opk": "508-7960-01",
+  "name": "Zakład radioterapii - UZ - NFZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b605"
+  },
+  "opk": "508-7998-09",
+  "name": "Pracownia echokardiografii i diagnostyki elektrokardiologicznej - UZ - NFZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b606"
+  },
+  "opk": "508-9600-01",
+  "name": "Punkt szczepiań - UZ - NFZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b607"
+  },
+  "opk": "526-7910-01",
+  "name": "Pracownia diagnostyki endoskopowej - program badań przesiewowych raka jelita grubego"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b608"
+  },
+  "opk": "527-9927-01",
+  "name": "Transplantacje - pobieranie narządów do przeszczepu"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b609"
+  },
+  "opk": "529-9929-01",
+  "name": "Staże lekarskie"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b60a"
+  },
+  "opk": "529-9929-70",
+  "name": "Staże studentów prowadzone przez Uniwersytet Rzeszowski"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b60b"
+  },
+  "opk": "529-9929-71",
+  "name": "Wynagrodzenie rezydentów w Zakładzie Diagnostyki Obrazowej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b60c"
+  },
+  "opk": "529-9929-72",
+  "name": "Wynagrodzenie kierownika specjalizacji rezydenta w szpitalu"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b60d"
+  },
+  "opk": "529-9929-79",
+  "name": "Staże studentów prowadzone przez pozostałe uczelnie"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b60e"
+  },
+  "opk": "530-4902-02",
+  "name": "SOR - obszar rejestracji,field2:segregacji medycznej i przyjęć (nie planowanych)"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b60f"
+  },
+  "opk": "530-4922-01",
+  "name": "Apteka"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b610"
+  },
+  "opk": "530-4922-03",
+  "name": "Pracownia cytostatyków"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b611"
+  },
+  "opk": "530-9200-01",
+  "name": "Stanowisko ds.zakażeń wewnątrzszpitalnych"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b612"
+  },
+  "opk": "530-9220-01",
+  "name": "Stanowisko ds.żywienia (dietetyczki)"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b613"
+  },
+  "opk": "530-9930-01",
+  "name": "Rejestracja poradni w dziale konsultacyjnym"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b614"
+  },
+  "opk": "530-9930-02",
+  "name": "Rejestracja w zakładzie diagnostyki obrazowej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b615"
+  },
+  "opk": "530-9930-03",
+  "name": "Izba przyjęć/rejestracja do oddziałów szpitalnych"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b616"
+  },
+  "opk": "530-9930-09",
+  "name": "Obsługa bloku I"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b617"
+  },
+  "opk": "530-9930-10",
+  "name": "Obsługa bloku II"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b618"
+  },
+  "opk": "535-9935-01",
+  "name": "Centralna sterylizacja"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b619"
+  },
+  "opk": "535-9935-03",
+  "name": "Kuchnia"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b61a"
+  },
+  "opk": "535-9935-06",
+  "name": "Dział higieny szpitalnej"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b61b"
+  },
+  "opk": "535-9935-08",
+  "name": "Dział techniczno-gospodarczy - transport"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b61c"
+  },
+  "opk": "535-9935-10",
+  "name": "Sekcja informatyki"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b61d"
+  },
+  "opk": "535-9935-11",
+  "name": "Dział zaopatrzenia i magazynów"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b61e"
+  },
+  "opk": "535-9935-18",
+  "name": "Dział techniczno-gospodarczy"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b61f"
+  },
+  "opk": "535-9935-19",
+  "name": "Sekcja inwestycji"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b620"
+  },
+  "opk": "535-9935-25",
+  "name": "Dział techniczno-gospodarczy - tlenownia"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b621"
+  },
+  "opk": "535-9935-36",
+  "name": "Koszty związane z najmem"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b622"
+  },
+  "opk": "540-1160-01",
+  "name": "Poradnia medycyny pracy - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b623"
+  },
+  "opk": "540-4902-02",
+  "name": "Szpitalny oddział ratunkowy - obszar rejestracji,field2:segregacji medycznej i przyjęć (nie planowanych)-UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b624"
+  },
+  "opk": "540-7130-01",
+  "name": "Pracownia immunologii transfuzjologicznej - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b625"
+  },
+  "opk": "540-7210-01",
+  "name": "Pracownia USG - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b626"
+  },
+  "opk": "540-7220-01",
+  "name": "Pracownia tomografii komputerowej - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b627"
+  },
+  "opk": "540-7240-01",
+  "name": "Pracownia diagnostyki obrazowej - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b628"
+  },
+  "opk": "540-7242-01",
+  "name": "Pracownia mammografii - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b629"
+  },
+  "opk": "540-7250-01",
+  "name": "Pracownia rezonansu magnetycznego - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b62a"
+  },
+  "opk": "540-7300-01",
+  "name": "Zakład patomorfologii - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b62b"
+  },
+  "opk": "540-7910-01",
+  "name": "Pracownia diagnostyki endoskopowej - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b62c"
+  },
+  "opk": "540-7998-09",
+  "name": "Pracownia echokardiografii i diagnostyki elektrokardiologicznej - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b62d"
+  },
+  "opk": "545-9945-01",
+  "name": "Centralna sterylizacja - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b62e"
+  },
+  "opk": "545-9945-03",
+  "name": "Kuchnia - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b62f"
+  },
+  "opk": "545-9945-30",
+  "name": "Ksero dokumentacji medycznej - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b630"
+  },
+  "opk": "545-9945-33",
+  "name": "Parking - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b631"
+  },
+  "opk": "545-9945-36",
+  "name": "Koszty związane z najmem - UZ"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b632"
+  },
+  "opk": "550-9950-01",
+  "name": "Dyrekcja"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b633"
+  },
+  "opk": "550-9950-03",
+  "name": "Dział finansowo-księgowy + płace"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b634"
+  },
+  "opk": "550-9950-04",
+  "name": "Dział kadr"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b635"
+  },
+  "opk": "550-9950-06",
+  "name": "Sekcja zamówień publicznych"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b636"
+  },
+  "opk": "550-9950-09",
+  "name": "Dział statystyki medycznej i dokumentacji chorych"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b637"
+  },
+  "opk": "550-9950-10",
+  "name": "Dział organizacji i zarządzania"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b638"
+  },
+  "opk": "550-9950-12",
+  "name": "Radca prawny"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b639"
+  },
+  "opk": "550-9950-13",
+  "name": "Stanowiska samodzielne"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b63a"
+  },
+  "opk": "550-9950-14",
+  "name": "Stanowisko ds.BHP"
+},
+{
+  "_id": {
+    "$oid": "64e880da93895db19a39b63b"
+  },
+  "opk": "550-9950-15",
+  "name": "Kapelan szpitalny"
+}]

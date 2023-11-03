@@ -32,7 +32,7 @@ export class AppDictionaryService {
 
   // Mapping website host with API host
   API_hosts: { [key:string]: string } = {
-    'dummyhost': 'http://localhost:3001/api'
+    'dummyhost': 'http://localhost:3002/api2'
   };
 
   // Mapping website host with environment if needed by the API

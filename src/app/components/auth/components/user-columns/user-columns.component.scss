@@ -1,0 +1,35 @@
+$font-size-form-field: 1.3em;
+$font-size-legend: 1.2em;
+$font-color-legend: #354d72;
+$color-input : #492624;
+$color-h:#FFF;
+
+
+.mdc-text-field,.mat-mdc-form-field{margin-right: 5px;}
+fieldset
+  {
+    margin-top: 2em;
+    border: thin solid rgba(220,220,220,0.5);
+    border-radius: 5px;
+    // max-width: 100%;
+    // width: 100%;
+    padding: 5px;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    legend
+    {
+      font-size: $font-size-legend;
+      color:$font-color-legend;
+      margin-bottom:0px;
+      margin-left:16px;
+      padding: 0px 10px;
+      font-weight: 600;
+    }
+    form{
+        width: 100%; 
+        .mat-mdc-form-field{
+            width: 70%;
+        }       
+    }
+}

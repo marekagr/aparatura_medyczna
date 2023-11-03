@@ -1,9 +1,10 @@
-import { Component, OnInit,Inject,ChangeDetectorRef } from '@angular/core';
-import {FormArray, FormControl,FormGroup,Validators,FormBuilder, Form} from '@angular/forms';
+import { Component, OnInit,Inject,ChangeDetectorRef,Renderer2 } from '@angular/core';
+import {FormArray, FormControl,FormGroup,Validators,FormBuilder, Form,ValidationErrors } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA,MatDialog } from '@angular/material/dialog';
-import { Subscription,Observable,startWith,pipe,map, } from 'rxjs';
+import { Subscription,Observable,startWith,pipe,map,merge } from 'rxjs';
 import * as _moment from 'moment';
 import { Moment } from 'moment';
+import 'moment/locale/pl';
 const moment = _moment;
 
 import { RegisterService } from "../../services/register.service";
@@ -32,11 +33,12 @@ export class RegisterFormComponent implements OnInit{
   opkAll: Opk[] = [];
   opks: string[] = [];
   private opks$?: Subscription;
+  private focusComment:any={index:-1,cursorPosition:-1,id:"-1"}
   get comments(): FormArray {
     return this.dealForm.get('comments') as FormArray;
   }
   getCurrentId():string{return this.currentDeal?._id}
-  newInfo={info:''}
+  newInfo={comment:''}
   file_upload_config = {
     API: `${this.utilityService.getAPI('file_upload')}/rejestr/pliki/`,
     MIME_types_accepted: "application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,image/jpeg",
@@ -44,7 +46,7 @@ export class RegisterFormComponent implements OnInit{
     data: ''
   };
 
-  constructor(public attachmentService: AttachmentService,private utilityService: UtilityService,public opkService:OpkService,private ref: ChangeDetectorRef,private formBuilder: FormBuilder,public registerService: RegisterService,private dialog: MatDialog,private dialogRef: MatDialogRef<RegisterFormComponent>,
+  constructor(private renderer: Renderer2,public attachmentService: AttachmentService,private utilityService: UtilityService,public opkService:OpkService,private ref: ChangeDetectorRef,private formBuilder: FormBuilder,public registerService: RegisterService,private dialog: MatDialog,private dialogRef: MatDialogRef<RegisterFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any) {
       // this.getData()
       console.log('data',data)
@@ -55,20 +57,22 @@ export class RegisterFormComponent implements OnInit{
         sn: new FormControl(),
         producer:new FormControl(),        
         year_production: new FormControl(),
+        active:new FormControl(true),
 
         deal_service:new FormControl(),
         number_of_deal:new FormControl(),
         deal_old_service:new FormControl(),
 
         date_of_last_inspection:new FormControl(),
-        inspection_period: new FormControl(),
+        date_of_next_inspection:new FormControl(),
+        inspection_period: new FormControl(null,[Validators.pattern(/^\d{2}:\d{2}:\d{2}$/),Validators.required]),
         end_of_quarantee: new FormControl(),       
 
         opk:new FormControl(),
         inventory_number:new FormControl(),
         
         comments:new FormArray([]),
-
+        ingredients:new FormArray([]),
 
         _id:new FormControl(),
         __v:new FormControl(),
@@ -80,7 +84,7 @@ export class RegisterFormComponent implements OnInit{
     this.currentDeal$=this.registerService.getcurrentDealListener().subscribe(deal=>{
       console.log('current deal:',deal)
       this.currentDeal=deal
-      this.dealForm.get('own_number_of_deal')?.setValue(deal.own_number_of_deal)
+      // this.dealForm.get('own_number_of_deal')?.setValue(deal.own_number_of_deal)
       //this.ref.detectChanges();
     });
     this.attachments$=this.attachmentService.getBlobsListener().subscribe(items=>{
@@ -111,7 +115,7 @@ export class RegisterFormComponent implements OnInit{
       map(value =>  this.utilityService.filterAutocomplete(value,this.producersAll))
       // this._registration_business_unit_filter(value)),
     ).subscribe(items=>this.producers=items);
-
+    this.onValueChanges()
    
     this.dealForm.patchValue(this.currentDeal);
     this.addToFormArray()
@@ -169,7 +173,7 @@ removeInfo(controlName:string,index:number){
   addToFormArray(){
     if(! this.currentDeal._id){
         [{name:'Krzysztof',surname:'Stolarski'}].forEach(item => {
-        (<FormArray>(this.dealForm.get('representative1_of_deal'))).push(this.createInfo(item))
+        (<FormArray>(this.dealForm.get('comments'))).push(this.createInfo(item))
        });
       //  [{name:'23213kk',surname:'hhssa3h'},{name:'gggddd',surname:'gggg'}].forEach(item => {
       //   (<FormArray>(this.dealForm.get('representative2_of_deal'))).push(this.createInfo(item))
@@ -215,12 +219,14 @@ removeInfo(controlName:string,index:number){
   }
   onSubmit({ value, valid }: { value: any, valid: boolean }) {
     console.log(value, valid);
-    const DateArray=['date_of_deal_start','date_of_deal_stop','date_of_sign','date_of_registration']
-    const DateArrArr=['changeDeal','terminationWithDeal','terminationRest']
-    // if(this.logBookForm.get('meter_reading_end').value-this.logBookForm.get('meter_reading_start').value-this.totalKm !=0){
-    //   alert(`Błąd, ilość km nieprawidłowa. Ilość km ze strony 1 (${this.logBookForm.get('meter_reading_end').value-this.logBookForm.get('meter_reading_start').value}km) niezgodna z sumą km ze strony 2 (${this.totalKm}km)`);
+    const DateArray=['date_of_last_inspection','date_of_next_inspection','end_of_quarantee']
+    // const DateArrArr=['changeDeal','terminationWithDeal','terminationRest']
+    // if(this.dealForm.get('meter_reading_end').value-this.dealForm.get('meter_reading_start').value-this.totalKm !=0){
+    //   alert(`Błąd, ilość km nieprawidłowa. Ilość km ze strony 1 (${this.dealForm.get('meter_reading_end').value-this.dealForm.get('meter_reading_start').value}km) niezgodna z sumą km ze strony 2 (${this.totalKm}km)`);
     //   return;
     // }
+    
+    
     if(valid){
   
         // if(! this.data.isEdit){
@@ -233,13 +239,13 @@ removeInfo(controlName:string,index:number){
         let dateOfBirth: Moment = moment(value.date_of_deal_start);
         console.log('dateOfBirth',dateOfBirth.toObject().years)
         DateArray.forEach(item=>{if(value[item]!=null) value[item]=this.utilityService.getParseUTCDate(value[item])})
-        DateArrArr.forEach(key=>{
-          console.log('key',key)
-          value[key].map((item:any)=>{
-            console.log('item',item,item['date'])
-            // value[item['date']]=this.utilityService.getParseUTCDate(value[item['date']])}
-            if(item['date']!=null)item['date']=this.utilityService.getParseUTCDate(item['date'])}
-        )})
+        // DateArrArr.forEach(key=>{
+        //   console.log('key',key)
+        //   value[key].map((item:any)=>{
+        //     console.log('item',item,item['date'])
+        //     // value[item['date']]=this.utilityService.getParseUTCDate(value[item['date']])}
+        //     if(item['date']!=null)item['date']=this.utilityService.getParseUTCDate(item['date'])}
+        // )})
   
   
   
@@ -253,7 +259,7 @@ removeInfo(controlName:string,index:number){
             console.log(data)
             this.registerService.setcurrentDealListener(data)
             this.currentDeal=data
-            this.dealForm.get('own_number_of_deal')?.setValue(data.own_number_of_deal)
+            // this.dealForm.get('own_number_of_deal')?.setValue(data.own_number_of_deal)
              this.ref.detectChanges();
             // this.commonService.tellSomethingToParent(`Zmiany dla ${value.name} zapisano`);
             this.dialogRef.close(value);
@@ -302,5 +308,74 @@ removeInfo(controlName:string,index:number){
     }
     else alert('Uwaga błędy w formularzu. Dane nie zapisane');
   }
+  getFormValidationErrors() {
+    
+    console.log('%c ==>> Validation Errors: ', 'color: red; font-weight: bold; font-size:25px;');
   
+    let totalErrors = 0;
+  
+    
+      Object.keys(this.dealForm.controls).forEach(key => {
+        const controlErrors: ValidationErrors = this.dealForm.get(key)?.errors!
+        if (controlErrors != null) {
+          Object.keys(controlErrors).forEach(keyError => {
+           console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+          });
+        }
+      });
+  }
+
+  onValueChanges(){
+
+    merge(this.dealForm.get('date_of_last_inspection')!.valueChanges,this.dealForm.get('inspection_period')!.valueChanges).
+      subscribe(x=>{
+        if(this.dealForm.get('date_of_last_inspection')?.valid && this.dealForm.get('inspection_period')?.valid){
+          console.log('change',x,this.dealForm.get('date_of_last_inspection')?.valid,this.dealForm.get('inspection_period')?.valid)
+          let nextInspection=new Date(this.dealForm.get('date_of_last_inspection')?.value)
+          // this.dealForm.get('date_of_next_inspection')?.setValue(nextInspection);
+          this.dealForm.get('date_of_next_inspection')?.setValue(this.utilityService.addPeriodInspectionToDate(nextInspection,this.dealForm.get('inspection_period')?.value))
+        }
+      //  if((! isNaN(this.dealForm.get('meter_reading_start')!.value)) && (! isNaN(this.dealForm.get('inspection_period')!.value)))
+          // this.dealForm.get('km').setValue(this.dealForm.get('meter_reading_end').value-this.dealForm.get('meter_reading_start').value)
+      });
+  }
+
+
+  selectf=(data: Date) => {
+    if(this.focusComment.cursorPosition>-1){
+    let commentH:any=this.comments.controls[this.focusComment.index!].value.comment as string
+    let dataH=`${data.getDate()}.${data.getMonth()+1}.${data.getFullYear()}`
+    
+    // commentH=commentH.ins
+    const insertAt = (str:string, sub:string, pos:number) => `${str.slice(0, pos)}${sub}${str.slice(pos)}`;
+     (this.dealForm.get('comments') as FormArray).at(this.focusComment.index!).get('comment')?.setValue(insertAt(commentH,dataH,this.focusComment.cursorPosition!))
+      // var element = this.renderer.selectRootElement(`#${this.focusComment.id}`);
+      setTimeout(()=>{
+        var element = this.renderer.selectRootElement('#mat-input-17');        
+        element.focus();
+        element.selectionStart=this.focusComment.cursorPosition;                        
+      },0);
+     
+   // (<FormArray>(this.dealForm.get('comments')))[i].setValue(`fffff`)
+    // (<FormArray>(this.dealForm.get('comments'))).push(this.createInfo(item))
+    // this.dealForm.get('comments').c controls[i].setValue(`${commentH}fffff`)
+    //this.focusComment={index:-1,cursorPosition:-1,id:"-1"}
+    // console.log(event,i,this.comments)
+    }
+  };
+
+  focusOutComment=(event:any,i:number)=>{
+    
+    this.focusComment['index']=i
+    this.focusComment.cursorPosition=event.target.selectionStart
+    this.focusComment.id=event.target.id
+    console.log(event.target.selectionStart,this.focusComment,event.target)
+  }
+
+  onChange(form:FormGroup) {
+    // reset the form value to the newly emitted form group value.
+    console.log("onChange",form)
+    this.dealForm = form;
+  }
+
 }

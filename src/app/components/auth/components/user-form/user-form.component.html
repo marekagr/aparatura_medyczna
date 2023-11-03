@@ -1,0 +1,32 @@
+<user-password [user]='user'></user-password>
+
+<form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+  <mat-form-field>
+    <mat-label>Uprawnienia</mat-label>
+    <mat-select multiple  formControlName="grantMenu"   panelClass="mat-select-panel--marek" >
+      <mat-option *ngFor="let item of grantMenu" [value]="item._id">
+        {{item.desc}}&nbsp;{{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Uprawnienia do słowników</mat-label>
+    <mat-select multiple  formControlName="grantDirectory"   panelClass="mat-select-panel--marek" >
+      <mat-option *ngFor="let item of grantDirectory" [value]="item._id">
+        {{item.desc}}&nbsp;{{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-stroked-button type="submit" [color]="'greenish'"  [disabled]="userForm.invalid" style="margin-left: auto;align-self: flex-start;">Zapisz</button>
+
+ </form>
+
+ <table *ngIf="grantMenu!.length > 0 ">
+        <tr *ngFor="let grant of grantMenu">
+          <td>{{grant.desc}}</td>
+          <td>{{grant.name}}</td>
+          <td><span *ngIf="checkIfGrant(grant._id,user?.grantMenu)"><mat-icon>check_circle_outline</mat-icon></span></td>
+        </tr>
+      </table>
+

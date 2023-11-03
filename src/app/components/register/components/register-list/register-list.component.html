@@ -14,10 +14,10 @@
   
   
           <mat-form-field appearance="fill" class="example-form-field">
-            <mat-label>Data obow. od-do</mat-label>
+            <mat-label>Data nast. przeglądu od-do</mat-label>
             <mat-date-range-input [rangePicker]="date_of_issue_start_stop">
-              <input matStartDate placeholder="Data od" formControlName="date_of_deal_start" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
-              <input matEndDate placeholder="Data do" formControlName="date_of_deal_stop" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+              <input matStartDate placeholder="Data od" formControlName="date_of_next_inspection_start" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+              <input matEndDate placeholder="Data do" formControlName="date_of_next_inspection_stop" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
             </mat-date-range-input>
             <mat-datepicker-toggle matSuffix [for]="date_of_issue_start_stop"></mat-datepicker-toggle>
             <mat-date-range-picker #date_of_issue_start_stop>
@@ -30,7 +30,8 @@
           </mat-form-field>
   
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="szukaj" [matAutocomplete]="auto" formControlName='number_of_deal'>
+            <mat-label>szukaj:&nbsp;{{searchLabel}}</mat-label>
+            <input matInput placeholder="szukaj" [matAutocomplete]="auto" formControlName='name'>
           </mat-form-field>
           <!-- <span>Twój wybór: {{filterDateForm.get('deal_name')?.value | json}}</span> -->
   
@@ -46,10 +47,14 @@
     </mat-toolbar-row>
   </mat-toolbar>
   
-  <table mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows mat-elevation-z8 matSortActive="own_number_of_deal" matSortDirection="asc" matSortDisableClear>
+  <table mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows mat-elevation-z8 matSortActive="name" matSortDirection="asc" matSortDisableClear>
   
   
     <!-- ['date_of_sign','do']; -->
+    <ng-container matColumnDef="left">
+      <th mat-header-cell *matHeaderCellDef ><span style="color: red;"><mat-icon>alarm</mat-icon></span></th>
+      <td mat-cell *matCellDef="let element"> {{global_utilities.howManyDays(element.date_of_next_inspection)}} <td>
+    </ng-container>
   
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa Urządzenia</th>
@@ -95,13 +100,18 @@
     </ng-container>
   
     <ng-container matColumnDef="opk">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header align="center" class="header-align-right">Oddział</th>
+      <th mat-header-cell *matHeaderCellDef  align="center" class="header-align-right">Oddział</th>
       <td mat-cell *matCellDef="let element" align="right"> {{element.opk}} <td>
     </ng-container>
 
     <ng-container matColumnDef="date_of_last_inspection">
       <th mat-header-cell *matHeaderCellDef mat-sort-header >Data przeglądu</th>
       <td mat-cell *matCellDef="let element" align="center">{{element.date_of_last_inspection|date:'dd.MM.y':'+0000':'pl'}} <td>
+    </ng-container>
+
+    <ng-container matColumnDef="date_of_next_inspection">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Następny przegląd</th>
+      <td mat-cell *matCellDef="let element" align="center">{{element.date_of_next_inspection|date:'dd.MM.y':'+0000':'pl'}} <td>
     </ng-container>
   
     <ng-container matColumnDef="inventory_number">
@@ -110,13 +120,13 @@
     </ng-container>
    
     <ng-container matColumnDef="end_of_quarantee">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Koniec gwarancji</th>
+      <th mat-header-cell *matHeaderCellDef >Koniec gwarancji</th>
       <td mat-cell *matCellDef="let element"> {{element.end_of_quarantee}}<td>
     </ng-container>
 
 
     <ng-container matColumnDef="inspection_period">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Przegląd okres</th>
+      <th mat-header-cell *matHeaderCellDef >Przegląd okres</th>
       <td mat-cell *matCellDef="let element"> {{element.inspection_period}}<td>
     </ng-container>
   <!--
@@ -167,33 +177,20 @@
           <div class="example-element-diagram">
   
             <div style="display: flex;flex-flow: row wrap;">
+             
               <div [ngClass]="'expandBox'">
-                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Pozostałe dane </h3>
-                <div style="flex:1 1 48%;border-right: thin dashed rgba(112,112,112,0.5);margin-right: 5px;">
-                  <div>status: <span [ngClass]="'expandInfo'">{{element.status}}</span></div>
-                  <div>wartość: <span [ngClass]="'expandInfo'"> {{element.value_of_deal|currency:'zł':'symbol':'1.2-2':'pl'}}</span></div>
-                  <div>data zgłoszenia: <span [ngClass]="'expandInfo'">{{element.date_of_registration|date:'dd.MM.y':'+0000':'pl'}}</span></div>
-                  <div>jednostka zgłaszająca: <span [ngClass]="'expandInfo'"> {{element.registration_business_unit}}</span></div>
-                  <div>osoba zgłaszająca: <span [ngClass]="'expandInfo'"> {{element.registration_person}}</span></div>
-                </div>
-                <div style="flex:1 1 48%">
-                  <span [ngClass]="'expandInfo'">{{element.issue_of_deal}}</span>
-                </div>
-              </div>
-              <div [ngClass]="'expandBox'">
-                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Strony umowy</h3>
-                <div style="flex:1 1 48%;border-right: thin dashed rgba(112,112,112,0.5);margin-right: 5px;">
-                  <mat-icon style="color:red">looks_one</mat-icon><span [ngClass]="'expandInfo'">{{element.part1_of_deal}}</span>
-                  <ul>
-                    <li *ngFor="let representative of element.representative1_of_deal"><span [ngClass]="'expandInfo'">{{representative.name}}</span>,&nbsp;<span [ngClass]="'expandInfo'">{{representative.surname}}</span></li>
-                  </ul>
-                </div>
-  
-                <div style="flex:1 1 48%">
-                  <mat-icon style="color:red">looks_two</mat-icon><span [ngClass]="'expandInfo'">{{element.part2_of_deal}}</span>
-                  <ul>
-                    <li *ngFor="let representative of element.representative2_of_deal"><span [ngClass]="'expandInfo'">{{representative.name}}</span>,&nbsp;<span [ngClass]="'expandInfo'">{{representative.surname}}</span></li>
-                  </ul>
+                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Uwagi</h3>
+
+
+                <div style="flex:1 1 100%">
+                  
+                  <table>
+                    <th>Uwaga</th><th>Data wpisu</th>
+                    <tr *ngFor="let comment of element.comments">
+                        <td [ngClass]="comment"><span [ngClass]="'expandInfo'">{{comment.comment}}</span></td>
+                        <td [ngClass]="comment"><span [ngClass]="'expandInfo'">{{comment.createdAt|date:'dd.MM.y hh:mm':'+0000':'pl'}}</span></td>                        
+                    </tr>
+                  </table>
                 </div>
               </div>
               <!-- <div style="display: flex;flex-flow: row wrap;flex:1 1 100%">
@@ -210,7 +207,7 @@
           <div class="example-element-diagram">
             <div style="display: flex;flex-flow: row wrap;">
               <div [ngClass]="'expandBox'">
-                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Źródła współfinansowania </h3>
+                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Urządzenie nadrzędne</h3>
                 <div style="flex:1 1 100%">
                   <table>
                     <tr *ngFor="let source of element.cofinancing">
@@ -220,7 +217,7 @@
                 </div>
               </div>
               <div [ngClass]="'expandBox'">
-                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Uzupełnienia i zmiany </h3>
+                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Urządzenia podrzędne </h3>
                 <div style="flex:1 1 100%">
                   <table>
                     <tr *ngFor="let change of element.changeDeal">
@@ -229,26 +226,8 @@
                   </table>
                 </div>
               </div>
-              <div [ngClass]="'expandBox'">
-                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Informacje o rozwiązaniu umowy za zgodą stron </h3>
-                <div style="flex:1 1 100%">
-                  <table>
-                    <tr *ngFor="let change of element.terminationWithDeal">
-                        <td><span [ngClass]="'expandInfo'">{{change.info}}</span></td><td><span [ngClass]="'expandInfo'">{{change.date|date:'dd.MM.y':'+0000':'pl'}}</span></td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-              <div [ngClass]="'expandBox'">
-                <h3 style="flex:1 1 100%;border-bottom: thin dashed rgba(112,112,112,0.5);color:red">Odstąpienie, wypowiedzenie, wygaśnięcie </h3>
-                <div style="flex:1 1 100%">
-                  <table>
-                    <tr *ngFor="let change of element.terminationRest">
-                        <td><span [ngClass]="'expandInfo'">{{change.info}}</span></td><td><span [ngClass]="'expandInfo'">{{change.date|date:'dd.MM.y':'+0000':'pl'}}</span></td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
+             
+
             </div>
           </div>
           <div class="example-element-diagram">
@@ -272,12 +251,14 @@
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-    class="example-element-row"
+    class="example-element-row" 
+    [ngClass]="alertClass | getAlertClass:[{date_of_next_inspection:row.date_of_next_inspection, alertUrgentDate:alertUrgentDate,alertWarnDate:alertWarnDate}]"
       [class.student-expanded-row]="expandedElement === row"
     (click)="expandedElement = expandedElement === row ? null : row"
       >
     </tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" ></tr>
+    
   </table>
   <mat-paginator [pageSizeOptions]="[10, 20, 30]"
                    showFirstLastButtons itemsPerPageLabel="item per pagelabel"

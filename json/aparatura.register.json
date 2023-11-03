@@ -1,0 +1,171 @@
+[{
+  "_id": {
+    "$oid": "64d4a215747dd922a5330b00"
+  },
+  "name": "AGREGAT",
+  "type": "842 PP -78 H12",
+  "sn": "23356",
+  "producer": "",
+  "year_production": "1992",
+  "deal_service": "DT",
+  "opk": "Dział techniczny",
+  "number_of_deal": "",
+  "deal_old_service": "DT",
+  "date_of_last_inspection": {
+    "$date": "2017-06-29T04:05:00.000Z"
+  },
+  "inventory_number": "",
+  "comments": [],
+  "end_of_quarantee": null,
+  "inspection_period": "00:03:00",
+  "__v": 0,
+  "files": [
+    {
+      "filename": "wniosek-poczta-elektroniczna-16102023_15424.pdf",
+      "path": "C:\\Users\\maadm\\Documents\\Projects\\aparatura_medyczna\\backend\\assets\\64d4a215747dd922a5330b00\\wniosek-poczta-elektroniczna-16102023_15424.pdf",
+      "_id": {
+        "$oid": "652d3db07b2bc31197ca4e4a"
+      },
+      "createdAt": {
+        "$date": "2023-10-16T13:42:08.002Z"
+      },
+      "updatedAt": {
+        "$date": "2023-10-16T13:42:08.002Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2023-08-10T08:38:45.658Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-16T13:42:08.002Z"
+  },
+  "active": false,
+  "date_of_next_inspection": {
+    "$date": "2017-09-29T04:05:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64d4a215747dd922a5330b02"
+  },
+  "name": "AGREGAT",
+  "type": "842 PP -78 H12",
+  "sn": "23910",
+  "producer": "",
+  "year_production": "1995",
+  "deal_service": "DT",
+  "opk": "Dział techniczny",
+  "number_of_deal": "",
+  "deal_old_service": "DT",
+  "date_of_last_inspection": {
+    "$date": "2017-06-29T04:05:00.000Z"
+  },
+  "inventory_number": "",
+  "comments": [],
+  "end_of_quarantee": null,
+  "inspection_period": "00:03:00",
+  "__v": 0,
+  "files": [],
+  "createdAt": {
+    "$date": "2023-08-10T08:38:45.664Z"
+  },
+  "updatedAt": {
+    "$date": "2023-09-11T07:17:31.200Z"
+  },
+  "date_of_next_inspection": {
+    "$date": "2017-09-29T04:05:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64d4a215747dd922a5330b04"
+  },
+  "name": "Akcelerator medyczny",
+  "type": "VitalBeam",
+  "sn": "H193992",
+  "producer": "Varian Medical Systems",
+  "year_production": "2019",
+  "deal_service": "Varian",
+  "opk": "Radiologia",
+  "number_of_deal": "",
+  "deal_old_service": "",
+  "date_of_last_inspection": {
+    "$date": "2023-06-24T04:05:00.000Z"
+  },
+  "inventory_number": "5136",
+  "comments": [
+    {
+      "comment": "przegląd co 3 miesiące - gwarancjs 07 .2024 r.",
+      "_id": {
+        "$oid": "65040d1e5e027e211ff4146a"
+      },
+      "createdAt": {
+        "$date": "2023-09-15T07:51:58.160Z"
+      },
+      "updatedAt": {
+        "$date": "2023-09-15T07:51:58.160Z"
+      }
+    }
+  ],
+  "end_of_quarantee": null,
+  "inspection_period": "00:03:00",
+  "__v": 0,
+  "files": [],
+  "createdAt": {
+    "$date": "2023-08-10T08:38:45.669Z"
+  },
+  "updatedAt": {
+    "$date": "2023-09-15T07:51:58.160Z"
+  },
+  "date_of_next_inspection": {
+    "$date": "2023-09-24T04:05:00.000Z"
+  },
+  "active": true
+},
+{
+  "_id": {
+    "$oid": "64d4a215747dd922a5330b07"
+  },
+  "name": "Akcelerator medyczny",
+  "type": "VitalBeam",
+  "sn": "H193997",
+  "producer": "Varian Medical Systems",
+  "year_production": "2019",
+  "deal_service": "Varian",
+  "opk": "Radiologia",
+  "number_of_deal": "",
+  "deal_old_service": "",
+  "date_of_last_inspection": {
+    "$date": "2021-07-26T04:05:00.000Z"
+  },
+  "inventory_number": "5137",
+  "comments": [
+    {
+      "comment": "przegląd co 3 miesiące- - gwarancja do 07.2024r. Tak ustaliła radiologia sama.",
+      "_id": {
+        "$oid": "65293f12fc4dd57e9081c735"
+      },
+      "createdAt": {
+        "$date": "2023-10-13T12:58:58.450Z"
+      },
+      "updatedAt": {
+        "$date": "2023-10-13T12:58:58.450Z"
+      }
+    }
+  ],
+  "end_of_quarantee": null,
+  "inspection_period": "00:03:00",
+  "__v": 0,
+  "files": [],
+  "createdAt": {
+    "$date": "2023-08-10T08:38:45.674Z"
+  },
+  "updatedAt": {
+    "$date": "2023-10-13T12:58:58.450Z"
+  },
+  "date_of_next_inspection": {
+    "$date": "2021-10-26T04:05:00.000Z"
+  },
+  "active": true
+}]

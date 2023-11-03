@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
 import { Subscription,iif,of,pipe, Observable,merge,fromEvent } from 'rxjs';
-import {debounceTime,tap,finalize,switchMap,mapTo} from 'rxjs/operators'
+import {debounceTime,tap,finalize,switchMap,mapTo, filter} from 'rxjs/operators'
 
 import { RegisterService } from "../../services/register.service";
 import { AttachmentService } from "../../../../common/services/attachment.service";
@@ -49,27 +49,35 @@ export class RegisterListComponent implements OnInit,OnDestroy,AfterViewInit {
   public columnList$: Subscription=new Subscription();
   public columnList:any[]=[];
   public currentUser: CurrentUser|null=null;
-  displayedColumns = ['name', 'type','sn','producer','year_production','deal_service','number_of_deal','deal_old_service','opk','date_of_last_inspection','inventory_number','end_of_quarantee','inspection_period','do'];
+  displayedColumns = ['left','name', 'type','sn','producer','year_production','deal_service','number_of_deal','deal_old_service','opk','date_of_last_inspection','date_of_next_inspection','inventory_number','end_of_quarantee','inspection_period','do'];
   dataSource = new MatTableDataSource();
   dialogRegisterFormRef: MatDialogRef<RegisterFormComponent> | undefined
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   // @ViewChild('chooseDateButton',{ read: ElementRef }) chooseDateBtn!: ElementRef;
   filterDateForm:FormGroup= new FormGroup({
-    date_of_deal_start:new FormControl(),
-    date_of_deal_stop:new FormControl(),
-    number_of_deal:new FormControl(),
+    date_of_next_inspection_start:new FormControl(),
+    date_of_next_inspection_stop:new FormControl(),
+    name:new FormControl(),
   })
   expandedElement:any;
   isLoading = false;
   isLoadingResults = false;
   sortState={active:'',direction:''}
+  today=new Date();
+  selectedDay=30
+  alertUrgentDate:Date=new Date();
+  alertWarnDate:Date=new Date()
+  alertUrgentMR=0;
+  alertWarnMR=0;
+  alertClass={};
+  searchLabel=''
   // firstPageLabel = $localize`First page`;
   // itemsPerPageLabel = $localize`Items per page:`;
   // lastPageLabel = $localize`Last page`;
 
 
-  constructor(public authService:AuthService,public attachmentService:AttachmentService,public downloadService:DownloadService,private global_utilities: UtilityService,public registerService: RegisterService,private ref: ChangeDetectorRef,private dialog: MatDialog,public matPaginatorIntl: MatPaginatorIntl) {
+  constructor(public authService:AuthService,public attachmentService:AttachmentService,public downloadService:DownloadService,public global_utilities: UtilityService,public registerService: RegisterService,private ref: ChangeDetectorRef,private dialog: MatDialog,public matPaginatorIntl: MatPaginatorIntl) {
     this.authService.currentUser$.subscribe(x => {
       this.currentUser = x!
     });
@@ -98,7 +106,11 @@ export class RegisterListComponent implements OnInit,OnDestroy,AfterViewInit {
     })
 
 
-    this.sort.sortChange.subscribe(()=>{console.log('sortchange',this.sort.active,this.sort.direction);this.sortState={active:this.sort.active,direction:this.sort.direction}})
+    this.sort.sortChange.subscribe(()=>{
+      console.log('sortchange',this.sort.active,this.sort.direction);
+      this.sortState={active:this.sort.active,direction:this.sort.direction}
+      this.searchLabel=this.authService.getColumnValueByField('id',this.sort.active)
+    })
 
     this.matPaginatorIntl.firstPageLabel="pierwsza strona"
     this.matPaginatorIntl.itemsPerPageLabel="ilość na stronie"
@@ -106,6 +118,11 @@ export class RegisterListComponent implements OnInit,OnDestroy,AfterViewInit {
     this.matPaginatorIntl.nextPageLabel = 'następna strona';
     this.matPaginatorIntl.previousPageLabel = 'poprzednia strona'
     this.matPaginatorIntl.getRangeLabel = dutchRangeLabel
+
+    this.alertUrgentDate.setDate(new Date().getDate()+Math.floor(this.selectedDay/2));
+    this.alertWarnDate.setDate(new Date().getDate()+this.selectedDay);
+    this.searchLabel=this.authService.getColumnValueByField('id',this.sort.active)
+
   }
 
 
@@ -117,6 +134,7 @@ export class RegisterListComponent implements OnInit,OnDestroy,AfterViewInit {
     // delete item['files']
     delete item['createdAt']
     delete item['updatedAt']
+    if(item['inspection_period']==null || item['inspection_period']=='')item['inspection_period']="00:03:00"
 
     // delete item['representative1_of_deal']
     // delete item['representative2_of_deal']
@@ -196,8 +214,8 @@ download(filename:string,_id:string){
 }
 
 chooseDateRange(){
-  console.log(this.filterDateForm.get('date_of_deal_start')?.value)
-  console.log(this.filterDateForm.get('date_of_deal_stop')?.value)
+  console.log(this.filterDateForm.get('date_of_next_inspection_start')?.value)
+  console.log(this.filterDateForm.get('date_of_next_inspection_stop')?.value)
   this.registerService.getDealByFilter(this.getFilterObject()).subscribe(
     console.log,
     console.error,
@@ -205,20 +223,25 @@ chooseDateRange(){
   )
 }
 addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-  console.log(`${type}: ${event.value},${this.filterDateForm.get('date_of_deal_start')?.value},${this.filterDateForm.get('date_of_deal_stop')?.value},${this.filterDateForm.controls['date_of_deal_start'].errors}`);
-  if(this.filterDateForm.controls['date_of_deal_start'].errors==null && this.filterDateForm.controls['date_of_deal_stop'].errors==null)this.chooseDateRange()
+  console.log(`${type}: ${event.value},${this.filterDateForm.get('date_of_next_inspection_start')?.value},${this.filterDateForm.get('date_of_next_inspection_stop')?.value},${this.filterDateForm.controls['date_of_next_inspection_start'].errors}`);
+  if(this.filterDateForm.controls['date_of_next_inspection_start'].errors==null && this.filterDateForm.controls['date_of_next_inspection_stop'].errors==null)this.chooseDateRange()
 }
 
 
 findInName(){
-  return this.filterDateForm.get('number_of_deal')?.valueChanges
+  return this.filterDateForm.get('name')?.valueChanges
   .pipe(
     debounceTime(300),
+    filter(ciag=>{return ciag.length>2 || ciag.length==0}),
     tap(() => {this.isLoading = true;this.isLoadingResults = true;console.log('this.isLoadingResults',this.isLoadingResults)}),
 
     // switchMap(value => iif(()=>`${value}`.length>=3,this.appService.search({name: value}, 1))
     // switchMap(value => iif(()=>`${value}`.length>=3,of(['43233','34324234','333333','33334232']),of([]))
-    switchMap(value => iif(()=>{ const r=`${value}`.length>=1?true:false;return r},this.registerService.getDealByFilter(this.getFilterObject()),this.registerService.getDealByFilter({}))
+    switchMap(value => iif(()=>{ const 
+      r=`${value}`.length>=1?true:false;
+      return r},
+      this.registerService.getDealByFilter(this.getFilterObject(),this.sort.active),
+      this.registerService.getDealByFilter({}))
     .pipe(
       debounceTime(2000),
       finalize(() =>{this.isLoading = false;this.isLoadingResults = false;console.log('this.isLoadingResults',this.isLoadingResults)}),
@@ -229,7 +252,7 @@ findInName(){
 }
 
 getFilterObject(){
-  return {date_of_deal_start:this.filterDateForm.get('date_of_deal_start')?.value,date_of_deal_stop:this.filterDateForm.get('date_of_deal_stop')?.value,number_of_deal:this.filterDateForm.get('number_of_deal')?.value}
+  return {date_of_next_inspection_start:this.filterDateForm.get('date_of_next_inspection_start')?.value,date_of_next_inspection_stop:this.filterDateForm.get('date_of_next_inspection_stop')?.value,name:this.filterDateForm.get('name')?.value}
 }
 
 

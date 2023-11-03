@@ -1,0 +1,77 @@
+[{
+  "_id": {
+    "$oid": "5fd85cab6d63982200171cff"
+  },
+  "name": "Rodzaj zdarzenia",
+  "desc": "Rodzaj zdarzenia"
+},
+{
+  "_id": {
+    "$oid": "5fd85cc66d63982200171d00"
+  },
+  "name": "Rodzaj pojazdu",
+  "desc": "Rodzaj pojazdu"
+},
+{
+  "_id": {
+    "$oid": "5fd85ceb6d63982200171d01"
+  },
+  "name": "Cel wyjazdu",
+  "desc": "Cel wyjazdu"
+},
+{
+  "_id": {
+    "$oid": "5fd85d096d63982200171d02"
+  },
+  "name": "Wyposażenie",
+  "desc": "Wyposażenie"
+},
+{
+  "_id": {
+    "$oid": "5fd85d1f6d63982200171d03"
+  },
+  "name": "Kategorie",
+  "desc": "Kategorie"
+},
+{
+  "_id": {
+    "$oid": "5fd85d436d63982200171d04"
+  },
+  "name": "Jednostki",
+  "desc": "Jednostki"
+},
+{
+  "_id": {
+    "$oid": "5fd85d576d63982200171d05"
+  },
+  "name": "Produkty",
+  "desc": "Produkty"
+},
+{
+  "_id": {
+    "$oid": "5fd85d686d63982200171d06"
+  },
+  "name": "Pracownicy",
+  "desc": "Pracownicy"
+},
+{
+  "_id": {
+    "$oid": "5fd85d7a6d63982200171d07"
+  },
+  "name": "Kontrahenci",
+  "desc": "Kontrahenci"
+},
+{
+  "_id": {
+    "$oid": "5fd85d906d63982200171d08"
+  },
+  "name": "VAT",
+  "desc": "VAT"
+},
+{
+  "_id": {
+    "$oid": "5fde75bf5f8bbe32d8f0b38f"
+  },
+  "name": "Pilne",
+  "desc": "Pilne"
+}]

@@ -1,0 +1,24 @@
+<mat-accordion multi="true" *ngIf="users.length > 0 ">
+    <mat-expansion-panel *ngFor="let user of users">
+      <mat-expansion-panel-header>
+        {{ user.user }}
+      </mat-expansion-panel-header>
+  
+        <user-form [user]='user' [grantMenu]='grantMenu' [grantDirectory]='grantDirectory'></user-form>
+  
+        <!-- <table *ngIf="grantMenu.length > 0 ">
+          <tr *ngFor="let grant of grantMenu">
+            <td>{{grant.desc}}</td>
+            <td>{{grant.name}}</td>
+            <td><span *ngIf="checkIfGrant(grant._id,user?.grantMenu)"><mat-icon>check_circle_outline</mat-icon></span></td>
+          </tr>
+        </table> -->
+  
+      <!-- <mat-action-row *ngIf="userIsAuthenticated && userId === post.creator">
+        <a mat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
+        <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
+      </mat-action-row> -->
+    </mat-expansion-panel>
+  </mat-accordion>
+  
+  

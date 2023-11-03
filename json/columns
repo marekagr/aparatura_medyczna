@@ -1,0 +1,7 @@
+[{"id":"name","viewValue":"Nazwa Urządzenia","activated":"true"}, {"id":"type","viewValue":"Typ","activated":"true"},{"id":"sn","viewValue":"Numer fabryczny","activated":"true"},{"id":"producer","viewValue":"Producent","activated":"true"},
+    {"id":"year_production","viewValue":"Rok","activated":"true"},{"id":"deal_service","viewValue":"Serwis","activated":"true"},{"id":"number_of_deal","viewValue":"Nr umowy","activated":"true"},
+    {"id":"deal_old_service","viewValue":"Stary serwis","activated":"false"},{"id":"opk","viewValue":"Oddział","activated":"true"},{"id":"date_of_last_inspection","viewValue":"Data przeglądu","activated":"true"}
+    ,{"id":"date_of_next_inspection","viewValue":"Data następnęgo przeglądu","activated":"true"},
+    {"id":"inventory_number","viewValue":"Numer inwentarzowy","activated":"true"},{"id":"end_of_quarantee","viewValue":"Koniec gwarancji","activated":"true"},{"id":"inspection_period","viewValue":"Przegląd okres","activated":"true"},
+    {"id":"do","viewValue":"Wykonaj","activated":"true"}
+    ]

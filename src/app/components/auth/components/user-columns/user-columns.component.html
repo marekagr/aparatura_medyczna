@@ -1,0 +1,19 @@
+<!-- <p>user-columns works!</p>
+{{column|json}} -->
+<fieldset>
+    <legend>List pól do wyświetlenia</legend>
+<form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+    <mat-form-field *ngIf="columnList">
+      <mat-label>List pól do wyświetlenia</mat-label>
+      <mat-select multiple  formControlName="column"   panelClass="mat-select-panel--marek" >
+        <mat-option *ngFor="let item of columnList" [value]="item" >
+          {{item.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    &nbsp;
+    
+    <button mat-stroked-button type="submit" [color]="'greenish'"  [disabled]="userForm.invalid" style="margin-left: auto;align-self: flex-start;">Zapisz</button>
+  
+   </form>
+   </fieldset>

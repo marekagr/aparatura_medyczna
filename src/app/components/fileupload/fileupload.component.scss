@@ -1,0 +1,114 @@
+$modhyobitto-colors:(primary-dark:#4b830d,
+subtle-bg:#4b830d);
+
+.modhyobitto-file-uploader{
+  margin-top: 1em;
+  background-color: #eee;
+  border: 2px dashed #666;
+  padding: 3rem;
+  // @include media-breakpoint-down(lg) {
+  //     padding: 2rem;
+  // }
+  // @include media-breakpoint-down(sm) {
+  //     padding: 1rem;
+  // }
+  .files-for-upload{
+      margin-bottom: 3rem;
+      .selected-file{
+          border-radius: 0;
+          font-family: 'Roboto', sans-serif;
+          &:not(:last-of-type){
+              margin-bottom: 1rem;
+          }
+          .mat-expansion-panel-header{
+              cursor: default;
+              height: auto;
+              padding: 0;
+              &[aria-disabled=true]{
+                  color: inherit;
+              }
+              .selected-file__header{
+                  display: flex;
+                  width: 100%;
+                  align-items: center;
+                  justify-content: space-between;
+                  .selected-file__name{
+                      color: map-get($modhyobitto-colors, primary-dark);
+                      overflow: hidden;
+                      padding: 0 1.5rem;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                  }
+                  .selected-file__actions{
+                      display: flex;
+                      justify-content: flex-end;
+                      button{
+                          display: flex;
+                          align-items: center;
+                          min-width: 0;
+                          padding: 0 15px;
+                      }
+                  }
+              }
+              &.mat-expanded{
+                  .selected-file__header{
+                      border-bottom: solid 1px map-get($modhyobitto-colors, divider);
+                  }
+              }
+              .mat-content{
+                  display: block;
+              }
+
+          }
+          .mat-expansion-panel-body{
+              padding-top: 1rem;
+              .selected-file__upload--error{
+                  color: map-get($modhyobitto-colors, notification);
+              }
+          }
+
+
+      }
+  }
+  .file-uploader__instructions{
+      color: map-get($modhyobitto-colors, primary);
+      margin-bottom: 3rem;
+      padding: 0 1rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      // @include media-breakpoint-down(lg) {
+      //   margin-bottom: 2rem;
+      // }
+      // @include media-breakpoint-down(sm) {
+      //     margin-bottom: 1rem;
+      // }
+  }
+  .file-upload__options{
+      display: flex;
+      justify-content: center;
+      button{
+          &.all_file__upload, &.all_file__cancel{
+              margin: 0 3px;
+              display: flex;
+              align-items: center;
+              border: 1px solid map-get($modhyobitto-colors, subtle-bg);
+              min-width: 0;
+              padding: 0 15px;
+          }
+      }
+      button{
+        &.file-upload__browse{
+            margin: 0 3px;
+            display: flex;
+            color:#4b830d;
+            align-items: center;
+            border: 1px solid map-get($modhyobitto-colors, subtle-bg);
+            min-width: 0;
+            padding: 0 15px;
+        }
+    }
+      .file-upload__native-selection{
+          display: none;
+      }
+  }
+}

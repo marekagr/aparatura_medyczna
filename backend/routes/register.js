@@ -243,7 +243,7 @@ router.get("/download", (req, res, next) => {
 
 
 router.get("", (req, res, next) => {
-  Register.find().sort({own_number_of_deal:1}).then(documents => {
+  Register.find().sort({name:1}).then(documents => {
     // console.log('documents:',documents)
     res.status(200).json(documents);
   })
@@ -254,23 +254,35 @@ router.post("/filtruj", (req, res) => {
 
   const body=JSON.parse(req.body);
   console.log('body:',req.get('Content-Type'),req.body,body);
-  const pattern={date_of_deal_start:{ $gte: body['date_of_deal_start'] },date_of_deal_stop:{ $lte: body['date_of_deal_stop']},number_of_deal:{ $regex: body['number_of_deal'], $options: "i" }}
-  const p={}
+  const pattern={date_of_next_inspection_start:{key:'date_of_next_inspection',value:{$gte: body['date_of_next_inspection_start']} },date_of_next_inspection_stop:{key:'date_of_next_inspection',value:{ $lte: body['date_of_next_inspection_stop']}},name:{key:'name',value:{$regex: body['name'], $options: "i" }},type:{key:'type',value:{$regex: body['type'], $options: "i" }},sn:{key:'sn',value:{$regex: body['sn'], $options: "i" }}
+  ,producer:{key:'producer',value:{$regex: body['producer'], $options: "i" }},
+  deal_service:{key:'deal_service',value:{$regex: body['deal_service'], $options: "i" }},inventory_number:{key:'inventory_number',value:{$regex: body['inventory_number'], $options: "i" }}
+  }
+  const p=[]
+  const p1={}
 
   Object.entries(body).forEach(([key,value])=>{
     const obj={}
-    obj[`${key}`]=pattern[key]
-    if(value)Object.assign(p,obj)
+    const help=pattern[key]
+    obj[`${help.key}`]=help.value
+    if(value)p.push(obj)
     // console.log('klucz,wartość',key,value,p)
    })
 
+
   console.log("wynik",p)
+  if(p.length>0)p1['$and']=p
 
+  // Register.find(p).sort({name:1}).exec((err, documents) => {
+  //   if (err) return res.status(400).json(err);
 
-  Register.find(p).sort({date_of_deal_start:1}).exec((err, documents) => {
-    if (err) return res.status(400).json(err);
+  //   res.status(200).json(documents);
+  // });
 
+  Register.find(p1).then((documents) => {
     res.status(200).json(documents);
+  }).catch((err) => {
+    res.status(400).json(err);
   });
 });
 
@@ -290,7 +302,6 @@ router.post("/import/csv", (req, res) => {
     console.log('fuelPrevious',values)
     updateInsertInjPerson(body,values)
   }).catch((err) => {console.log(err)});
-
 
 
 

@@ -1,6 +1,6 @@
 const getAttachmentURL = () => {
-  //  return __dirname + `/assets`;
-  return __dirname + `/../assets`
+  return __dirname + `/assets`; //windows
+  //return __dirname + `/../assets` //linux
 };
 exports.getDownloadURL = () => {
   //  return 'backend/assets';

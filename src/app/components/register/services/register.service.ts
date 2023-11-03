@@ -87,12 +87,19 @@ export class RegisterService {
       });
   }
 
-  getDealByFilter(filtr:any[string]):Observable<any> {
+  getDealByFilter(filtr:any[string],sortColumn:string=''):Observable<any> {
 
-      const date_of_deal_start=typeof filtr['date_of_deal_start'] == 'undefined' ||  filtr['date_of_deal_start'] ==null ?null:this.utilityService.getParseUTCDate(filtr['date_of_deal_start']);
-      const date_of_deal_stop=typeof filtr['date_of_deal_stop'] == 'undefined' ||  filtr['date_of_deal_stop'] ==null ?null:this.utilityService.getParseUTCDate(filtr['date_of_deal_stop']);
-      if(date_of_deal_start)filtr['date_of_deal_start']=date_of_deal_start
-      if(date_of_deal_stop)filtr['date_of_deal_stop']=date_of_deal_stop
+      const date_of_next_inspection_start=typeof filtr['date_of_next_inspection_start'] == 'undefined' ||  filtr['date_of_next_inspection_start'] ==null ?null:this.utilityService.getParseUTCDate(filtr['date_of_next_inspection_start']);
+      const date_of_next_inspection_stop=typeof filtr['date_of_next_inspection_stop'] == 'undefined' ||  filtr['date_of_next_inspection_stop'] ==null ?null:this.utilityService.getParseUTCDate(filtr['date_of_next_inspection_stop']);
+      if(date_of_next_inspection_start)filtr['date_of_next_inspection_start']=date_of_next_inspection_start
+      if(date_of_next_inspection_stop)filtr['date_of_next_inspection_stop']=date_of_next_inspection_stop
+      if(sortColumn!='' && sortColumn!='name'){        
+        filtr[sortColumn]=filtr['name']
+        delete filtr['name']
+        
+        
+      }
+
 
       let url=`${this.globalUrl}/rejestr/filtruj`;
       // return this.http.post<any>( url,filtr,httpOptionsText).subscribe((data) => {
@@ -127,7 +134,7 @@ export class RegisterService {
     console.log('setNewDeal');
     if(item==null)
       return of(this.currentDeal$.next({_id:null,__v:null, own_number_of_deal:null, number_of_deal:'',type_of_deal:'',deal_name: '',
-      date_of_sign:new Date(),place_of_sign: 'Tarnobrzeg', date_of_deal_start:new Date(), date_of_deal_stop:new Date(), issue_of_deal:"", status:'',
+      date_of_sign:new Date(),place_of_sign: 'Tarnobrzeg', date_of_next_inspection_start:new Date(), date_of_next_inspection_stop:new Date(), issue_of_deal:"", status:'',
       value_of_deal:0,date_of_registration:new Date(), registration_business_unit: '',registration_person: '', part1_of_deal: 'Wojewódzki Szpital im. Zofii z Zamoyskich Tarnowskiej w Tarnobrzegu',
       part2_of_deal: '', representative1_of_deal:[],representative2_of_deal:[],cofinancing:[],changeDeal:[],terminationWithDeal:[],terminationRest:[],
     }))

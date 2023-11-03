@@ -1,0 +1,102 @@
+<div class="mat__tab__content">  
+    <div class="item">
+      <fieldset>
+        <legend> Dostępne urządzenia</legend>
+            <table mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows mat-elevation-z8 matSortActive="name" matSortDirection="asc" matSortDisableClear>
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header></th>    
+                    <td mat-cell *matCellDef="let element"> 
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null" [checked]="selection.isSelected(element)">
+                        </mat-checkbox>                                
+                    <td>
+                </ng-container>
+
+            
+                <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa Urządzenia</th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} <td>
+                </ng-container>
+            
+                <!-- Name Column -->
+                <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Typ</th>
+                <td mat-cell *matCellDef="let element"> {{element.type}} <td>
+                <!-- <td mat-cell *matCellDef="let element"> {{element.date|date:'y.MM.dd':'+0000':'pl'}} <td> -->
+                </ng-container>
+            
+                <ng-container matColumnDef="sn">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Numer fabryczny</th>
+                <td mat-cell *matCellDef="let element"> {{element.sn}} <td>
+                </ng-container>
+            
+            
+            
+                <ng-container matColumnDef="opk">
+                <th mat-header-cell *matHeaderCellDef  align="center" class="header-align-right">Oddział</th>
+                <td mat-cell *matCellDef="let element" align="right"> {{element.opk}} <td>
+                </ng-container>
+                
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row">
+                </tr>
+                <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" ></tr> -->
+                
+            </table>
+        </fieldset>
+    </div>
+    <div class="item">
+        <div class="arrows">            
+            <button mat-mini-fab><mat-icon class="color-redish">keyboard_double_arrow_right</mat-icon></button>
+            <button mat-mini-fab class="color-redish"><mat-icon>keyboard_double_arrow_left</mat-icon></button>
+        </div>
+    </div>
+    <div class="item">
+        <fieldset>
+          <legend> Urządzenia w zestawie</legend>
+              <table mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows mat-elevation-z8 matSortActive="name" matSortDirection="asc" matSortDisableClear>
+                  <!-- Checkbox Column -->
+                  <ng-container matColumnDef="select">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>    
+                      <td mat-cell *matCellDef="let element"> 
+                          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null" [checked]="selection.isSelected(element)">
+                          </mat-checkbox>                                
+                      <td>
+                  </ng-container>
+  
+              
+                  <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa Urządzenia</th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} <td>
+                  </ng-container>
+              
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="type">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Typ</th>
+                  <td mat-cell *matCellDef="let element"> {{element.type}} <td>
+                  <!-- <td mat-cell *matCellDef="let element"> {{element.date|date:'y.MM.dd':'+0000':'pl'}} <td> -->
+                  </ng-container>
+              
+                  <ng-container matColumnDef="sn">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Numer fabryczny</th>
+                  <td mat-cell *matCellDef="let element"> {{element.sn}} <td>
+                  </ng-container>
+              
+              
+              
+                  <ng-container matColumnDef="opk">
+                  <th mat-header-cell *matHeaderCellDef  align="center" class="header-align-right">Oddział</th>
+                  <td mat-cell *matCellDef="let element" align="right"> {{element.opk}} <td>
+                  </ng-container>
+                  
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row" (click)="selection.toggle(row)">
+                  </tr>
+                  <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row" ></tr> -->
+                  
+              </table>
+          </fieldset>
+      </div>    
+</div>

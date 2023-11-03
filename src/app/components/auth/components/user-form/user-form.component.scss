@@ -1,0 +1,10 @@
+$font-size-form-field: 1em;
+$color-input : #492624;
+$color-h:#a62d25;
+
+mat-form-field,.section--checkbox{
+  margin:0 5px;
+  font-size: $font-size-form-field;
+  color:$color-input;
+  display: block;
+}

@@ -50,16 +50,19 @@ form{
 
 div.mat__tab__content{
   display:flex ;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   padding: 15px 5px;
   width: 99%;
   position: relative;
   height: auto;
+  align-items: baseline;
+  align-content: space-evenly;
+   justify-content: normal; 
   margin: 0;
   .item {
     flex-grow: 1;
     // flex-basis: 40%;
-    margin: 10px;
+    margin: 5px;
     display: flex;
     flex-flow: row wrap;
   }
@@ -70,8 +73,8 @@ div.mat__tab__content{
   {
     border: thin solid rgba(220,220,220,0.5);
     border-radius: 5px;
-    max-width: 100%;
-    width: 100%;
+    // max-width: 100%;
+    // width: 100%;
     padding: 5px;
     background-color: #fff;
     display: flex;

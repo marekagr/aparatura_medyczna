@@ -87,11 +87,11 @@ const app = express();
 });
 
 // Register.re .plugin(autoIncrement.plugin, { model: 'Register', field: 'number_of_deal' });
-app.use("/api1/rejestr", registerRoutes);
-app.use("/api1/uzytkownik", userRoutes);
-app.use("/api1/uprawnienia", grantsRoutes);
-app.use("/api1/pracownik", employeeRoutes);
-app.use("/api1/opk", opkRoutes);
+app.use("/api2/rejestr", registerRoutes);
+app.use("/api2/uzytkownik", userRoutes);
+app.use("/api2/uprawnienia", grantsRoutes);
+app.use("/api2/pracownik", employeeRoutes);
+app.use("/api2/opk", opkRoutes);
 
 app.use((req, res, next) => {
   res.json([{id:1},{id:2}])

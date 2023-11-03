@@ -1,6 +1,7 @@
 const express = require("express");
 const GrantDirectory = require("../models/GrantDirectory");
 const GrantMenu = require("../models/GrantMenu");
+const Column = require("../models/Column")
 const router = express.Router();
 
 
@@ -45,5 +46,13 @@ router.get("/slowniki", (req, res, next) => {
     res.status(200).json(documents);
   })
 });
+
+router.get("/kolumny", (req, res, next) => {
+  Column.find().sort({order:1}).then(documents => {
+    // console.log('documents:',documents)
+    res.status(200).json(documents);
+  })
+});
+
 
 module.exports = router;

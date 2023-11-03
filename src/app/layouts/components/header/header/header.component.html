@@ -47,8 +47,8 @@
   </div>
 </mat-menu>
       
-      <!-- <a *ngIf="checkGrant('Administracja')" routerLink="/Administracja" mat-stroked-button routerLinkActive="focus__item"><span style="font-size: 1.5em;"><mat-icon>admin_panel_settings</mat-icon></span>Panel admin.</a>
-      <button *ngIf="currentUser" mat-stroked-button  class="menu__button" (click)="logout()">Wyloguj</button> -->
+      <a *ngIf="checkGrant('Administracja')" routerLink="/Administracja" mat-stroked-button routerLinkActive="focus__item"><span style="font-size: 1.5em;"><mat-icon>admin_panel_settings</mat-icon></span>Panel admin.</a>
+      <button *ngIf="currentUser" mat-stroked-button  class="menu__button" (click)="logout()">Wyloguj</button> 
       <a *ngIf="!currentUser" routerLink="/login"><button mat-stroked-button>Zaloguj się</button></a>
   </mat-toolbar-row>
 </mat-toolbar>

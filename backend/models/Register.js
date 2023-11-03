@@ -9,10 +9,7 @@ const representativeSchema = mongoose.Schema({
   // function:{type:String,required:true},
 },{ timestamps: true });
 
-const cofinancing = mongoose.Schema({
-  source:{type:String,required:true},
-  value:{type:Number,required:true},
-},{ timestamps: true });
+
 
 const commentsSchema = mongoose.Schema({
   comment:{type:String,required:true},
@@ -34,16 +31,15 @@ const registerSchema = mongoose.Schema({
   number_of_deal:String,
   deal_old_service:String,
   date_of_last_inspection:Date,
+  date_of_next_inspection:Date,
   inventory_number:String,
   comments:[commentsSchema],
   end_of_quarantee:Date,
   inspection_period:String,
-
-
-
+  active:{type:Boolean,default:true},
 
   files:[plik],
-
+  ingredients : [{registerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Register' }}],
   __v:Number
 },{ timestamps: true },{ collection: 'register' });
 registerSchema.set('collection', 'register');
